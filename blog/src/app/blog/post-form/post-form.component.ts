@@ -24,23 +24,22 @@ export class PostFormComponent implements OnInit {
 
     ngOnInit() {
         this.route
-            .params.switchMap((p: Params) => {
-            const id = p['id'];
+            .params
+            .switchMap((p: Params) => {
+                const id = p['id'];
 
-            if (typeof id != "undefined" && id != null) {
-                this.loading = true;
-                this.title = 'Edit post : ' + id;
-                this.formBtnText = 'Update';
-                return this.postService.getPost(id);
-            }
-        })
+                if (typeof id != "undefined" && id != null) {
+                    this.loading = true;
+                    this.title = 'Edit post : ' + id;
+                    this.formBtnText = 'Update';
+                    return this.postService.getPost(id);
+                } else return [];
+            })
             .subscribe((post) => {
-                this.loading = false;
                 this.post = post;
             }, (err) => {
-                this.loading = false;
                 this.message = new Message(MessageType.ERROR, err);
-            });
+            }, () => this.loading = false);
     }
 
     onsubmit() {

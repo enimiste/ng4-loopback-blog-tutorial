@@ -14,3 +14,11 @@
     padding: 8px 15px;
     cursor: pointer;
 }
+
+.load-more-end {
+    background: #eeeeee;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 15px;
+    cursor: not-allowed;
+}

@@ -17,8 +17,12 @@ export class PostService {
     constructor(private http: Http) {
     }
 
-    getPosts(): Observable<Post[]> {
-        const url = this.serverUrl + 'posts';
+    getPosts(query?: PostQuery): Observable<Post[]> {
+        let qs: string = '';
+        if (query != null) {
+            qs = '?filter=' + encodeURI(JSON.stringify(query));
+        }
+        const url = this.serverUrl + 'posts' + qs;
 
         return this.http
             .get(url, {headers: this.headers})
@@ -57,4 +61,19 @@ export class PostService {
                 return Observable.throw(err);
             });
     }
+
+    countPosts() {
+        const url = this.serverUrl + 'posts/count';
+        return this.http
+            .get(url, {headers: this.headers})
+            .map(res => res.json().count)
+            .catch(err => {
+                return Observable.throw(err);
+            });
+    }
+}
+
+export interface PostQuery {
+    limit: number;
+    skip: number;
 }

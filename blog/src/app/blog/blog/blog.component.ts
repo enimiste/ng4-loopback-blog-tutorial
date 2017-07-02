@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PostService} from "../post.service";
+import {PostQuery, PostService} from "../post.service";
 import {Post} from "../post";
 
 @Component({
@@ -9,16 +9,57 @@ import {Post} from "../post";
     providers: [PostService]
 })
 export class BlogComponent implements OnInit {
-    title: string = 'Blog page';
-    posts: Post[] = [];
+    private title: string = 'Blog page';
+    private posts: Post[] = [];
+    private pager: Pager = {limit: 2, current: 0, reachedEnd: false, total: 0};
+    private loading: boolean = false;
 
     constructor(private postService: PostService) {
     }
 
     ngOnInit() {
-        this.postService
-            .getPosts()
-            .subscribe((posts: Post[]) => this.posts = posts, err => console.log(err));
+        this.loadPosts();
+        this.totalPosts();
     }
 
+    loadPosts() {
+        const query: PostQuery = {
+            limit: this.pager.limit,
+            skip: this.pager.limit * this.pager.current
+        };
+        this.postService
+            .getPosts(query)
+            .subscribe((posts: Post[]) => {
+                if (typeof  posts != "undefined" && posts != null && posts.length > 0)
+                    this.posts = this.posts.concat(posts);
+                else
+                    this.pager.reachedEnd = true;
+            }, err => {
+                console.log(err)
+            }, ()=> this.loading = false);
+    }
+
+    totalPosts() {
+        this.postService
+            .countPosts()
+            .subscribe((count: number) => {
+                this.pager.total = count;
+            }, err => {
+                console.log(err)
+            });
+    }
+
+    loadMoreClicked() {
+        this.pager.current++;
+        this.loading = true;
+        this.loadPosts();
+        this.totalPosts();
+    }
+}
+
+interface Pager {
+    limit: number;
+    current: number;
+    reachedEnd: boolean;
+    total: number;
 }
