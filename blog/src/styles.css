@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.page-title {
+    margin-bottom: 10px;
+}
+
+.tabs-actions {
+    margin-bottom: 20px;
+}
+
+.load-more {
+    background: #eeeeee;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 15px;
+    cursor: pointer;
+}
