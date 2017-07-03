@@ -57,8 +57,10 @@ cd blog && ng serve
 ```
 6. Check the installation by accessing these links : [Api](http://localhost:3000/explorer) and [Blog](http://localhost:4200)
 
-# Thanks to : [Solmak.com](Solmak.com)
-[Youtube serie that i followed](https://www.youtube.com/playlist?list=PLP0rn5W6b0YUDcoeoOWFsB5KgNkYqSQXo)
+# Thanks to : 
+[Solmak.com](Solmak.com)
+
+Of these serie [Youtube serie that i followed](https://www.youtube.com/playlist?list=PLP0rn5W6b0YUDcoeoOWFsB5KgNkYqSQXo)
 
 # Contact Me
 [Nickel IT](mailto:e.nouni@nickel-it.com)
