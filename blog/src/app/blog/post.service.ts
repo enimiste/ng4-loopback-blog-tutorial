@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http} from "@angular/http";
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -39,20 +39,18 @@ export class PostService {
             });
     }
 
-    createPost(post: Post): Promise<Observable<any>> {
-        return this.authToken
-            .getToken()
-            .then((token) => {
-                return this.http
-                    .post(Config.serverUrl + 'posts?access_token=' + token, {
-                        title: post.title,
-                        body: post.body
-                    }, {headers: Config.headers})
-                    .map(res => res.json())
-                    .catch(err => {
-                        return Observable.throw(err);
-                    });
-            })
+    createPost(post: Post): Observable<any> {
+        const token = this.authToken
+            .getToken();
+        return this.http
+            .post(Config.serverUrl + 'posts?access_token=' + token, {
+                title: post.title,
+                body: post.body
+            }, {headers: Config.headers})
+            .map(res => res.json())
+            .catch(err => {
+                return Observable.throw(err);
+            });
     }
 
     updatePost(post: Post): Observable<any> {

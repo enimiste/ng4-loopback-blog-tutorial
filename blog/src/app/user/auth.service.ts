@@ -25,16 +25,13 @@ export class AuthService {
             .catch((err) => Observable.throw(err));
     }
 
-    logout(): Promise<Observable<Promise<any>>> {
-        return this.authTokenStorage
-            .getToken()
-            .then((token: string) => {
-                return this.http
-                    .post(Config.serverUrl + 'Users/logout?access_token=' + token, {}, {headers: Config.headers})
-                    .map((res) => {
-                        return this.authTokenStorage.clearToken();
-                    })
-                    .catch((err) => Observable.throw(err));
+    logout(): Observable<void> {
+        const token = this.authTokenStorage
+            .getToken();
+        return this.http
+            .post(Config.serverUrl + 'Users/logout?access_token=' + token, {}, {headers: Config.headers})
+            .map((res) => {
+                this.authTokenStorage.clearToken();
             })
             .catch((err) => Observable.throw(err));
     }

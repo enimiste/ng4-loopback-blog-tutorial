@@ -3,45 +3,31 @@ import {Config} from "../common/config";
 import {Injectable} from "@angular/core";
 
 export abstract class LoggedInUserStorage {
-    abstract setUser(user: User): Promise<any>;
+    abstract setUser(user: User): any;
 
-    abstract getCurrentUser(): Promise<User | null>;
+    abstract getCurrentUser(): User | null;
 }
 
 export abstract class AuthTokenStorage {
-    abstract setToken(token: string): Promise<any>;
+    abstract setToken(token: string): any;
 
-    abstract getToken(): Promise<string>;
+    abstract getToken(): string | null;
 
-    abstract clearToken(): Promise<any>;
+    abstract clearToken(): void;
 }
 
 @Injectable()
 export class LocalLoggedInStorage implements LoggedInUserStorage {
-    getCurrentUser(): Promise<User | null> {
-        return new Promise((resolve, reject) => {
-            try {
-                let json = localStorage.getItem(Config.currentUserKey);
-                if (json != null) {
-                    const user = JSON.parse(json);
-                    resolve(user);
-                } else
-                    return null;
-            } catch (e) {
-                reject(e);
-            }
-        });
+    getCurrentUser(): User | null {
+        let json = localStorage.getItem(Config.currentUserKey);
+        if (json != null) {
+            return JSON.parse(json);
+        } else
+            return null;
     }
 
-    setUser(user: User): Promise<any> {
-        return new Promise((resolve, reject) => {
-            try {
-                localStorage.setItem(Config.currentUserKey, JSON.stringify(user));
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
-        });
+    setUser(user: User): any {
+        localStorage.setItem(Config.currentUserKey, JSON.stringify(user));
     }
 
 }
@@ -49,40 +35,19 @@ export class LocalLoggedInStorage implements LoggedInUserStorage {
 
 @Injectable()
 export class SessionAuthTokenStorage implements AuthTokenStorage {
-    clearToken(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            try {
-                sessionStorage.removeItem(Config.tokenKey);
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
-        });
+    clearToken(): any {
+        sessionStorage.removeItem(Config.tokenKey);
     }
 
-    setToken(token: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            try {
-                sessionStorage.setItem(Config.tokenKey, JSON.stringify(token));
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
-        });
+    setToken(token: string): any {
+        sessionStorage.setItem(Config.tokenKey, JSON.stringify(token));
     }
 
-    getToken(): Promise<string> {
-        return new Promise((resolve, reject) => {
-            try {
-                let json = sessionStorage.getItem(Config.tokenKey);
-                if (json != null) {
-                    const toekn = JSON.parse(json);
-                    resolve(toekn);
-                } else
-                    return null;
-            } catch (e) {
-                reject(e);
-            }
-        });
+    getToken(): string | null {
+        let json = sessionStorage.getItem(Config.tokenKey);
+        if (json != null) {
+            return JSON.parse(json);
+        } else
+            return null;
     }
 }

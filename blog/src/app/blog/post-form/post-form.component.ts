@@ -61,17 +61,14 @@ export class PostFormComponent implements OnInit {
         } else {
             this.postService
                 .createPost(this.post)
-                .then((obs: Observable<any>) => {
-                    obs.subscribe((res) => {
-                        this.message = new Message(MessageType.SUCCESS, 'Post created');
-                        setTimeout(() => {
-                            this.router.navigate(['/blog', res.id]);
-                        }, 3000);
-                    }, (err) => {
-                        this.message = new Message(MessageType.ERROR, err);
-                    })
-                })
-                .catch((err) => this.message = new Message(MessageType.ERROR, err));
+                .subscribe((res) => {
+                    this.message = new Message(MessageType.SUCCESS, 'Post created');
+                    setTimeout(() => {
+                        this.router.navigate(['/blog', res.id]);
+                    }, 3000);
+                }, (err) => {
+                    this.message = new Message(MessageType.ERROR, err);
+                });
         }
     }
 

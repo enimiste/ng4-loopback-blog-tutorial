@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthTokenStorage, LoggedInUserStorage} from "./user/storage";
-import {User} from "./user/models";
 import {AuthService} from "./user/auth.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
@@ -23,39 +22,21 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authTokenStorage
-            .getToken()
-            .then((token: string | null) => {
-                if (token != null) {
-                    this.userStorage.getCurrentUser()
-                        .then((user: User | null) => {
-                            if (user != null) {
-                                this.loggedIn = true;
-                                this.username = user.username;
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                } else
-                    console.log('Token not found');
-            })
-            .catch((err) => console.log(err));
+        const token = this.authTokenStorage.getToken();
+        const user = this.userStorage.getCurrentUser();
+        if (token != null && user != null) {
+            this.loggedIn = true;
+            this.username = user.username;
+
+        } else
+            console.log('Token not found');
     }
 
     onLogoutClicked() {
         this.authService.logout()
-            .then((obs: Observable<any>) => {
-                console.log('logged out 1');
-                obs.subscribe((removeTokenPromise: Promise<any>) => {
-                    console.log('logged out 2');
-                    removeTokenPromise.then(() => {
-                        console.log('token removed');
-                        this.router.navigate(['/home']);
-                    })
-                        .catch((err) => console.log(err));
-                });
-            })
-            .catch((err) => console.log(err));
+            .subscribe(() => {
+                this.router.navigate(['/home']);
+
+            });
     }
 }

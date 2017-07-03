@@ -15,12 +15,8 @@ export class ProfilComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userStorage
-            .getCurrentUser()
-            .then((user: User) => {
-                this.user = user;
-            })
-            .catch((err) => console.error(err));
+        this.user = this.userStorage
+            .getCurrentUser();
     }
 
 }
