@@ -3,6 +3,7 @@ import {AuthTokenStorage, LoggedInUserStorage} from "./user/storage";
 import {AuthService} from "./user/auth.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
+import {Config} from "./common/config";
 
 @Component({
     selector: 'app-root',
@@ -18,7 +19,9 @@ export class AppComponent implements OnInit {
                 private authTokenStorage: AuthTokenStorage,
                 private authService: AuthService,
                 private router: Router) {
-        authService.loggedIn.subscribe((v: boolean) => this.loggedIn = v);
+        authService.loggedIn.subscribe((v: boolean) => {
+            this.loggedIn = v;
+        });
     }
 
     ngOnInit(): void {

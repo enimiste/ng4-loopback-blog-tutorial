@@ -14,6 +14,11 @@ export class AuthService {
     constructor(private http: Http,
                 private authTokenStorage: AuthTokenStorage) {
         this.loggedIn.next(false);
+        this.loggedIn.subscribe((v: boolean) => {
+            if (!v) {
+                this.authTokenStorage.clearToken();
+            }
+        });
     }
 
     login(username: string, password: string): Observable<LoggedInUser> {
@@ -34,7 +39,6 @@ export class AuthService {
         return this.http
             .post(Config.serverUrl + 'Users/logout', {}, {headers: Config.headers})
             .map((res) => {
-                this.authTokenStorage.clearToken();
                 Config.headers.delete('Authorization');
                 this.loggedIn.next(false);
             })
