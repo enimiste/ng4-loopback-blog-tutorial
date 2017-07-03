@@ -18,18 +18,16 @@ export class AppComponent implements OnInit {
                 private authTokenStorage: AuthTokenStorage,
                 private authService: AuthService,
                 private router: Router) {
-
+        authService.loggedIn.subscribe((v: boolean) => this.loggedIn = v);
     }
 
     ngOnInit(): void {
-        const token = this.authTokenStorage.getToken();
         const user = this.userStorage.getCurrentUser();
-        if (token != null && user != null) {
-            this.loggedIn = true;
+        if (user != null) {
             this.username = user.username;
 
         } else
-            console.log('Token not found');
+            console.log('User not found');
     }
 
     onLogoutClicked() {

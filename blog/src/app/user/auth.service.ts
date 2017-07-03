@@ -4,12 +4,16 @@ import {Http} from "@angular/http";
 import {Config} from "../common/config";
 import {LoggedInUser, User} from "./models";
 import {AuthTokenStorage} from "./storage";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthService {
 
+    public loggedIn: Subject<boolean> = new Subject<boolean>();
+
     constructor(private http: Http,
                 private authTokenStorage: AuthTokenStorage) {
+        this.loggedIn.next(false);
     }
 
     login(username: string, password: string): Observable<LoggedInUser> {
@@ -18,6 +22,7 @@ export class AuthService {
                 username: username, password: password
             }, {headers: Config.headers})
             .map((res) => {
+                this.loggedIn.next(true);
                 const json = res.json();
                 return new LoggedInUser(json.id,
                     new User(json.user.id, json.user.email, json.user.username));
@@ -31,6 +36,7 @@ export class AuthService {
             .map((res) => {
                 this.authTokenStorage.clearToken();
                 Config.headers.delete('Authorization');
+                this.loggedIn.next(false);
             })
             .catch((err) => Observable.throw(err));
     }
