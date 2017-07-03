@@ -43,7 +43,7 @@ export class PostService {
         const token = this.authToken
             .getToken();
         return this.http
-            .post(Config.serverUrl + 'posts?access_token=' + token, {
+            .post(Config.serverUrl + 'posts', {
                 title: post.title,
                 body: post.body
             }, {headers: Config.headers})

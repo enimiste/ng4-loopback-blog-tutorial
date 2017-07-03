@@ -54,7 +54,7 @@ export class PostFormComponent implements OnInit {
                     this.message = new Message(MessageType.SUCCESS, 'Post updated');
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id]);
-                    }, 1000);
+                    }, 2000);
                 }, (err) => {
                     this.message = new Message(MessageType.ERROR, err);
                 });
@@ -65,7 +65,7 @@ export class PostFormComponent implements OnInit {
                     this.message = new Message(MessageType.SUCCESS, 'Post created');
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id]);
-                    }, 3000);
+                    }, 2000);
                 }, (err) => {
                     this.message = new Message(MessageType.ERROR, err);
                 });

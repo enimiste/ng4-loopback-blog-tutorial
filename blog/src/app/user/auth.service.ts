@@ -26,12 +26,11 @@ export class AuthService {
     }
 
     logout(): Observable<void> {
-        const token = this.authTokenStorage
-            .getToken();
         return this.http
-            .post(Config.serverUrl + 'Users/logout?access_token=' + token, {}, {headers: Config.headers})
+            .post(Config.serverUrl + 'Users/logout', {}, {headers: Config.headers})
             .map((res) => {
                 this.authTokenStorage.clearToken();
+                Config.headers.delete('Authorization');
             })
             .catch((err) => Observable.throw(err));
     }
