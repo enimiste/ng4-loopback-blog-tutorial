@@ -9,7 +9,10 @@ import {HttpModule} from "@angular/http";
 import {PostDetailComponent} from './blog/post-detail/post-detail.component';
 import {PostFormComponent} from './blog/post-form/post-form.component';
 import {FormsModule} from "@angular/forms";
-import { LoginComponent } from './user/login/login.component';
+import {LoginComponent} from './user/login/login.component';
+import {ProfilComponent} from './user/profil/profil.component';
+import {AuthTokenStorage, LocalLoggedInStorage, LoggedInUserStorage, SessionAuthTokenStorage} from "./user/storage";
+import {AuthService} from "./user/auth.service";
 
 const routes: Routes = [
     {path: 'blog', component: BlogComponent},
@@ -18,7 +21,8 @@ const routes: Routes = [
     {path: 'post-blog', component: PostFormComponent},
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'user/login', component: LoginComponent}
+    {path: 'user/login', component: LoginComponent},
+    {path: 'user/account', component: ProfilComponent}
 ];
 
 @NgModule({
@@ -28,7 +32,8 @@ const routes: Routes = [
         HomeComponent,
         PostDetailComponent,
         PostFormComponent,
-        LoginComponent
+        LoginComponent,
+        ProfilComponent
     ],
     imports: [
         BrowserModule,
@@ -36,7 +41,11 @@ const routes: Routes = [
         RouterModule.forRoot(routes),
         FormsModule
     ],
-    providers: [],
+    providers: [
+        AuthService,
+        {provide: LoggedInUserStorage, useClass: LocalLoggedInStorage},
+        {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage}
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

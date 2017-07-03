@@ -1,19 +1,15 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {Message, MessageType} from "../../common/messages";
 import {Router} from "@angular/router";
-import {LoggedInUser, User} from "../models";
-import {AuthTokenStorage, LocalLoggedInStorage, LoggedInUserStorage, SessionAuthTokenStorage} from "../storage";
+import {LoggedInUser} from "../models";
+import {AuthTokenStorage, LoggedInUserStorage} from "../storage";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    providers: [
-        AuthService,
-        {provide: LoggedInUserStorage, useClass: LocalLoggedInStorage},
-        {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage}
-    ]
+    providers: []
 })
 export class LoginComponent implements OnInit {
     private message: Message = Message.None();
@@ -38,7 +34,7 @@ export class LoginComponent implements OnInit {
                     })
                     .then(() => {
                         setTimeout(() => {
-                            this.router.navigate(['/home']);
+                            this.router.navigate(['/user/account']);
                         }, 2000);
                     })
                     .catch((err) => {

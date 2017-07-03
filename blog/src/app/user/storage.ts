@@ -4,17 +4,21 @@ import {Injectable} from "@angular/core";
 
 export abstract class LoggedInUserStorage {
     abstract setUser(user: User): Promise<any>;
-    abstract getCurrentUser(): Promise<User>;
+
+    abstract getCurrentUser(): Promise<User | null>;
 }
 
 export abstract class AuthTokenStorage {
     abstract setToken(token: string): Promise<any>;
+
     abstract getToken(): Promise<string>;
+
+    abstract clearToken(): Promise<any>;
 }
 
 @Injectable()
 export class LocalLoggedInStorage implements LoggedInUserStorage {
-    getCurrentUser(): Promise<User> {
+    getCurrentUser(): Promise<User | null> {
         return new Promise((resolve, reject) => {
             try {
                 let json = localStorage.getItem(Config.currentUserKey);
@@ -45,6 +49,17 @@ export class LocalLoggedInStorage implements LoggedInUserStorage {
 
 @Injectable()
 export class SessionAuthTokenStorage implements AuthTokenStorage {
+    clearToken(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            try {
+                sessionStorage.removeItem(Config.tokenKey);
+                resolve();
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     setToken(token: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {

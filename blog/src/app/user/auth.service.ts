@@ -3,11 +3,13 @@ import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 import {Config} from "../common/config";
 import {LoggedInUser, User} from "./models";
+import {AuthTokenStorage} from "./storage";
 
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authTokenStorage: AuthTokenStorage) {
     }
 
     login(username: string, password: string): Observable<LoggedInUser> {
@@ -23,7 +25,17 @@ export class AuthService {
             .catch((err) => Observable.throw(err));
     }
 
-    logout(token: string): Observable<any> {
-        return null;
+    logout(): Promise<Observable<Promise<any>>> {
+        return this.authTokenStorage
+            .getToken()
+            .then((token: string) => {
+                return this.http
+                    .post(Config.serverUrl + 'Users/logout?access_token=' + token, {}, {headers: Config.headers})
+                    .map((res) => {
+                        return this.authTokenStorage.clearToken();
+                    })
+                    .catch((err) => Observable.throw(err));
+            })
+            .catch((err) => Observable.throw(err));
     }
 }
