@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 import {Config} from "../common/config";
 import {LoggedInUser, User} from "./models";
-import {AuthTokenStorage} from "./storage";
+import {AuthTokenStorage, LoggedInUserStorage} from "./storage";
 import {Subject} from "rxjs/Subject";
 
 @Injectable()
@@ -12,11 +12,13 @@ export class AuthService {
     public loggedIn: Subject<boolean> = new Subject<boolean>();
 
     constructor(private http: Http,
-                private authTokenStorage: AuthTokenStorage) {
+                private authTokenStorage: AuthTokenStorage,
+                private  userStorage: LoggedInUserStorage) {
         this.loggedIn.next(false);
         this.loggedIn.subscribe((v: boolean) => {
             if (!v) {
                 this.authTokenStorage.clearToken();
+                this.userStorage.clearCurrentUser();
             }
         });
     }

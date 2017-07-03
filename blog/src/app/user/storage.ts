@@ -6,6 +6,8 @@ export abstract class LoggedInUserStorage {
     abstract setUser(user: User): any;
 
     abstract getCurrentUser(): User | null;
+
+    abstract clearCurrentUser(): void;
 }
 
 export abstract class AuthTokenStorage {
@@ -18,6 +20,10 @@ export abstract class AuthTokenStorage {
 
 @Injectable()
 export class LocalLoggedInStorage implements LoggedInUserStorage {
+    clearCurrentUser(): void {
+        localStorage.removeItem(Config.currentUserKey);
+    }
+
     getCurrentUser(): User | null {
         let json = localStorage.getItem(Config.currentUserKey);
         if (json != null) {
