@@ -39,7 +39,7 @@
 ```
 
 # Installation :
-0. You should have installed the angular cli from : [Angular Cli](https://cli.angular.io/)
+0. You should install first the angular cli `npm install -g @angular/cli` and loopback cli `npm install -g loopback-cli`
 1. After cloning the repository and setting the database credentials and before running the server you should first edit the file `api/server/boot/install.js` to set `installed=false`.
 2. Install dependencies :
 ```sh
