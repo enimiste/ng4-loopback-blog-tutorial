@@ -5,15 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {Post} from "./post";
+import {Config} from "../common/config";
 
 @Injectable()
 export class PostService {
-    private headers: Headers = new Headers({
-        'Accept': 'application/json'
-    });
-
-    private serverUrl: string = 'http://localhost:3000/api/';
-
     constructor(private http: Http) {
     }
 
@@ -22,10 +17,10 @@ export class PostService {
         if (query != null) {
             qs = '?filter=' + encodeURI(JSON.stringify(query));
         }
-        const url = this.serverUrl + 'posts' + qs;
+        const url = Config.serverUrl + 'posts' + qs;
 
         return this.http
-            .get(url, {headers: this.headers})
+            .get(url, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
                 return Observable.throw(err);
@@ -33,9 +28,9 @@ export class PostService {
     }
 
     getPost(id: string): Observable<Post> {
-        const url = this.serverUrl + 'posts/' + id;
+        const url = Config.serverUrl + 'posts/' + id;
         return this.http
-            .get(url, {headers: this.headers})
+            .get(url, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
                 return Observable.throw(err);
@@ -43,9 +38,9 @@ export class PostService {
     }
 
     createPost(post: Post): Observable<any> {
-        const url = this.serverUrl + 'posts';
+        const url = Config.serverUrl + 'posts';
         return this.http
-            .post(url, {title: post.title, body: post.body}, {headers: this.headers})
+            .post(url, {title: post.title, body: post.body}, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
                 return Observable.throw(err);
@@ -53,9 +48,9 @@ export class PostService {
     }
 
     updatePost(post: Post): Observable<any> {
-        const url = this.serverUrl + 'posts/' + post.id;
+        const url = Config.serverUrl + 'posts/' + post.id;
         return this.http
-            .put(url, {title: post.title, body: post.body}, {headers: this.headers})
+            .put(url, {title: post.title, body: post.body}, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
                 return Observable.throw(err);
@@ -63,9 +58,9 @@ export class PostService {
     }
 
     countPosts() {
-        const url = this.serverUrl + 'posts/count';
+        const url = Config.serverUrl + 'posts/count';
         return this.http
-            .get(url, {headers: this.headers})
+            .get(url, {headers: Config.headers})
             .map(res => res.json().count)
             .catch(err => {
                 return Observable.throw(err);

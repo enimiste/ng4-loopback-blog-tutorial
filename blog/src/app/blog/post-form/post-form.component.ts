@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Post} from "../post";
 import {PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Message, MessageType} from "../../common/messages";
 
 @Component({
     selector: 'app-post-form',
@@ -63,33 +64,11 @@ export class PostFormComponent implements OnInit {
                     this.message = new Message(MessageType.SUCCESS, 'Post created');
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id]);
-                    }, 1000);
+                    }, 3000);
                 }, (err) => {
                     this.message = new Message(MessageType.ERROR, err);
                 });
         }
     }
 
-}
-
-enum MessageType {
-    NONE = -1,
-    ERROR = 0,
-    SUCCESS = 1,
-}
-class Message {
-    constructor(public type: MessageType, public message: string | null) {
-    }
-
-    static None() {
-        return new Message(MessageType.NONE, null);
-    }
-
-    isError() {
-        return this.type == 0;
-    }
-
-    isSuccess() {
-        return this.type == 1;
-    }
 }
