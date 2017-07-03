@@ -3,6 +3,7 @@ import {Post} from "../post";
 import {PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Message, MessageType} from "../../common/messages";
+import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'app-post-form',
@@ -60,14 +61,17 @@ export class PostFormComponent implements OnInit {
         } else {
             this.postService
                 .createPost(this.post)
-                .subscribe((res) => {
-                    this.message = new Message(MessageType.SUCCESS, 'Post created');
-                    setTimeout(() => {
-                        this.router.navigate(['/blog', res.id]);
-                    }, 3000);
-                }, (err) => {
-                    this.message = new Message(MessageType.ERROR, err);
-                });
+                .then((obs: Observable<any>) => {
+                    obs.subscribe((res) => {
+                        this.message = new Message(MessageType.SUCCESS, 'Post created');
+                        setTimeout(() => {
+                            this.router.navigate(['/blog', res.id]);
+                        }, 3000);
+                    }, (err) => {
+                        this.message = new Message(MessageType.ERROR, err);
+                    })
+                })
+                .catch((err) => this.message = new Message(MessageType.ERROR, err));
         }
     }
 

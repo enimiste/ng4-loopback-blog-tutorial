@@ -6,10 +6,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {Post} from "./post";
 import {Config} from "../common/config";
+import {AuthTokenStorage} from "../user/storage";
 
 @Injectable()
 export class PostService {
-    constructor(private http: Http) {
+    constructor(private http: Http,
+                private authToken: AuthTokenStorage) {
     }
 
     getPosts(query?: PostQuery): Observable<Post[]> {
@@ -37,14 +39,20 @@ export class PostService {
             });
     }
 
-    createPost(post: Post): Observable<any> {
-        const url = Config.serverUrl + 'posts';
-        return this.http
-            .post(url, {title: post.title, body: post.body}, {headers: Config.headers})
-            .map(res => res.json())
-            .catch(err => {
-                return Observable.throw(err);
-            });
+    createPost(post: Post): Promise<Observable<any>> {
+        return this.authToken
+            .getToken()
+            .then((token) => {
+                return this.http
+                    .post(Config.serverUrl + 'posts?access_token=' + token, {
+                        title: post.title,
+                        body: post.body
+                    }, {headers: Config.headers})
+                    .map(res => res.json())
+                    .catch(err => {
+                        return Observable.throw(err);
+                    });
+            })
     }
 
     updatePost(post: Post): Observable<any> {
