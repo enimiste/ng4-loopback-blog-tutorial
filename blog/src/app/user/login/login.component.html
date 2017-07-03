@@ -1,27 +1,31 @@
-<form (submit)="onLoginFormClicked(username.value, password.value)"
-      class="well">
-    <div class="alert alert-success" *ngIf="message.isSuccess()">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ message.message}}
-    </div>
-    <div class="alert alert-danger" *ngIf="message.isError()">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Error : </strong> {{ message.message}}
-    </div>
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control"
-               #username
-               name="username" id="username" placeholder="You username">
-    </div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form (submit)="onLoginFormClicked(username.value, password.value)"
+              class="well">
+            <div class="alert alert-success" *ngIf="message.isSuccess()">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message.message}}
+            </div>
+            <div class="alert alert-danger" *ngIf="message.isError()">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Error : </strong> {{ message.message}}
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control"
+                       #username
+                       name="username" id="username" placeholder="You username">
+            </div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control"
-               #password
-               name="password" id="password">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control"
+                       #password placeholder="password"
+                       name="password" id="password">
+            </div>
+
+            <a routerLink="/home" class="btn">Back to home</a>
+            <button type="submit" class="btn btn-primary pull-right">Login</button>
+        </form>
     </div>
-
-
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</div>
