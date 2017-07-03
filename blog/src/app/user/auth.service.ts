@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 import {Config} from "../common/config";
-import {LoggedInUser} from "./models";
+import {LoggedInUser, User} from "./models";
 
 @Injectable()
 export class AuthService {
@@ -12,17 +12,18 @@ export class AuthService {
 
     login(username: string, password: string): Observable<LoggedInUser> {
         return this.http
-            .post(Config.serverUrl + 'Users/login', {
+            .post(Config.serverUrl + 'Users/login?include=user', {
                 username: username, password: password
             }, {headers: Config.headers})
             .map((res) => {
                 const json = res.json();
-                return new LoggedInUser(json.id, json.userId, json.created, json.ttl);
+                return new LoggedInUser(json.id,
+                    new User(json.user.id, json.user.email, json.user.username));
             })
             .catch((err) => Observable.throw(err));
     }
 
-    logout(user: LoggedInUser): Observable<any>{
+    logout(token: string): Observable<any> {
         return null;
     }
 }
