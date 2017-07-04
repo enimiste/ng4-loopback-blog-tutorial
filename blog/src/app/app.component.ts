@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
                 private authService: AuthService,
                 private router: Router) {
         authService.loggedIn.subscribe((user: LoggedInUser | null) => {
-            this.user = Object.assign({}, user.user);//to avoid mutability
+            if (user == null) this.user = null;
+            else this.user = Object.assign({}, user.user);//to avoid mutability
         });
     }
 

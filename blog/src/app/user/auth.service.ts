@@ -44,6 +44,9 @@ export class AuthService {
                 Config.headers.delete('Authorization');
                 this.loggedIn.next(null);
             })
-            .catch((err) => Observable.throw(err));
+            .catch((err) => {
+                this.loggedIn.next(null);
+                return Observable.throw(err);
+            });
     }
 }
