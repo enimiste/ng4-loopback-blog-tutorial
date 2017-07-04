@@ -20,8 +20,11 @@ export class ProfilComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.userStorage
+        let currentUser = this.userStorage
             .getCurrentUser();
+        if (currentUser != null) {
+            this.user = currentUser.user;
+        }
     }
 
 }

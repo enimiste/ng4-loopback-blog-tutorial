@@ -1,11 +1,11 @@
-import {User} from "./models";
+import {LoggedInUser, User} from "./models";
 import {Config} from "../common/config";
 import {Injectable} from "@angular/core";
 
 export abstract class LoggedInUserStorage {
-    abstract setUser(user: User): any;
+    abstract setUser(user: LoggedInUser): any;
 
-    abstract getCurrentUser(): User | null;
+    abstract getCurrentUser(): LoggedInUser | null;
 
     abstract clearCurrentUser(): void;
 }
@@ -24,7 +24,7 @@ export class LocalLoggedInStorage implements LoggedInUserStorage {
         localStorage.removeItem(Config.currentUserKey);
     }
 
-    getCurrentUser(): User | null {
+    getCurrentUser(): LoggedInUser | null {
         let json = localStorage.getItem(Config.currentUserKey);
         if (json != null) {
             return JSON.parse(json);
@@ -32,7 +32,7 @@ export class LocalLoggedInStorage implements LoggedInUserStorage {
             return null;
     }
 
-    setUser(user: User): any {
+    setUser(user: LoggedInUser): any {
         localStorage.setItem(Config.currentUserKey, JSON.stringify(user));
     }
 

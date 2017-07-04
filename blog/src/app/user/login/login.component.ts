@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
             .subscribe((user: LoggedInUser) => {
                 console.log(user);
                 this.message = new Message(MessageType.SUCCESS, 'Logged In');
-                this.userStorage.setUser(user.user);
+                this.userStorage.setUser(user);
                 Config.headers.append('Authorization', user.token);
                 this.authTokenStorage.setToken(user.token);
                 setTimeout(() => {

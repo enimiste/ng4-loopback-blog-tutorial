@@ -27,11 +27,9 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         const user = this.userStorage.getCurrentUser();
         if (user != null) {
-            this.user = Object.assign({}, user);//to avoid mutability
-            console.log(this.user);
+            this.user = Object.assign({}, user.user);//to avoid mutability
         } else {
             this.user = null;
-            console.log('User not found');
         }
     }
 
