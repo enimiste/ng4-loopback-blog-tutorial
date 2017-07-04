@@ -57,6 +57,11 @@ cd blog && ng serve
 ```
 6. Check the installation by accessing these links : [Api](http://localhost:3000/explorer) and [Blog](http://localhost:4200)
 
+# Tips :
++ I created in this project an Angular pipes : `keys`  
++ I used also ReactiveFormsModule in registration form.  
++ To show input errors i created a component `<form-errors></form-errors>`  
+
 # Thanks to : 
 [Solmak.com](Solmak.com)
 
