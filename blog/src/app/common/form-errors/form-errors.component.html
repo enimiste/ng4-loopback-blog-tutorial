@@ -1,0 +1,5 @@
+<div class="form-errors" [hidden]="form.controls[inputName].valid || form.controls[inputName].untouched">
+    <p class="form-errors-item" *ngFor="let rule of (form.controls[inputName].errors | keys)">
+        {{ messages[rule] }}
+    </p>
+</div>

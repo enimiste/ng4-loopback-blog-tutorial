@@ -14,6 +14,8 @@ import {ProfilComponent} from './user/profil/profil.component';
 import {AuthTokenStorage, LocalLoggedInStorage, LoggedInUserStorage, SessionAuthTokenStorage} from "./user/storage";
 import {AuthService} from "./user/auth.service";
 import {RegisterComponent} from './user/register/register.component';
+import { FormErrorsComponent } from './common/form-errors/form-errors.component';
+import { KeysPipe } from './pipes/keys.pipe';
 
 const routes: Routes = [
     {path: 'blog', component: BlogComponent},
@@ -36,7 +38,9 @@ const routes: Routes = [
         PostFormComponent,
         LoginComponent,
         ProfilComponent,
-        RegisterComponent
+        RegisterComponent,
+        FormErrorsComponent,
+        KeysPipe
     ],
     imports: [
         BrowserModule,
@@ -50,7 +54,7 @@ const routes: Routes = [
         {provide: LoggedInUserStorage, useClass: LocalLoggedInStorage},
         {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage}
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }
