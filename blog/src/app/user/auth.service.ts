@@ -25,7 +25,7 @@ export class AuthService {
 
     login(username: string, password: string): Observable<LoggedInUser> {
         return this.http
-            .post(Config.serverUrl + 'Users/login?include=user', {
+            .post(Config.serverUrl + 'Accounts/login?include=user', {
                 username: username, password: password
             }, {headers: Config.headers})
             .map((res) => {
@@ -39,7 +39,7 @@ export class AuthService {
 
     logout(): Observable<void> {
         return this.http
-            .post(Config.serverUrl + 'Users/logout', {}, {headers: Config.headers})
+            .post(Config.serverUrl + 'Accounts/logout', {}, {headers: Config.headers})
             .map((res) => {
                 Config.headers.delete('Authorization');
                 this.loggedIn.next(false);
