@@ -8,11 +8,12 @@ import {HomeComponent} from './home/home.component';
 import {HttpModule} from "@angular/http";
 import {PostDetailComponent} from './blog/post-detail/post-detail.component';
 import {PostFormComponent} from './blog/post-form/post-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from './user/login/login.component';
 import {ProfilComponent} from './user/profil/profil.component';
 import {AuthTokenStorage, LocalLoggedInStorage, LoggedInUserStorage, SessionAuthTokenStorage} from "./user/storage";
 import {AuthService} from "./user/auth.service";
+import {RegisterComponent} from './user/register/register.component';
 
 const routes: Routes = [
     {path: 'blog', component: BlogComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'user/login', component: LoginComponent},
-    {path: 'user/account', component: ProfilComponent}
+    {path: 'user/account', component: ProfilComponent},
+    {path: 'user/register', component: RegisterComponent}
 ];
 
 @NgModule({
@@ -33,13 +35,15 @@ const routes: Routes = [
         PostDetailComponent,
         PostFormComponent,
         LoginComponent,
-        ProfilComponent
+        ProfilComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
         HttpModule,
         RouterModule.forRoot(routes),
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         AuthService,
