@@ -2,16 +2,16 @@
 var installed=true;
 module.exports = function (app) {
     if (!installed) {
-        var User = app.models.User;
+        var Account = app.models.Account;
         var Role = app.models.Role;
         var RoleMapping = app.models.RoleMapping;
         var cb = function (m) {
             console.log(m)
         };
 
-        User.create([
-            {username: 'admin', email: 'admin@contact.com', password: 'admin'}
-        ], function (err, users) {
+        Account.create([
+            {username: 'admin', email: 'admin@contact.com', password: 'admin', firstName: "Super", lastName: "Admin"}
+        ], function (err, Accounts) {
             if (err) return cb(err);
 
             //create the admin role
@@ -22,8 +22,8 @@ module.exports = function (app) {
 
                 //make bob an admin
                 role.principals.create({
-                    principalType: RoleMapping.USER,
-                    principalId: users[0].id
+                    principalType: RoleMapping.Account,
+                    principalId: Accounts[0].id
                 }, function (err, principal) {
                     cb(err);
                 });
