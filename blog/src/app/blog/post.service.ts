@@ -19,7 +19,7 @@ export class PostService {
         if (query != null) {
             qs = '?filter=' + encodeURI(JSON.stringify(query));
         }
-        const url = Config.serverUrl + 'posts' + qs;
+        const url = Config.serverUrl + 'Posts' + qs;
 
         return this.http
             .get(url, {headers: Config.headers})
@@ -30,7 +30,7 @@ export class PostService {
     }
 
     getPost(id: string): Observable<Post> {
-        const url = Config.serverUrl + 'posts/' + id;
+        const url = Config.serverUrl + 'Posts/' + id;
         return this.http
             .get(url, {headers: Config.headers})
             .map(res => res.json())
@@ -43,7 +43,7 @@ export class PostService {
         const token = this.authToken
             .getToken();
         return this.http
-            .post(Config.serverUrl + 'posts', {
+            .post(Config.serverUrl + 'Posts', {
                 title: post.title,
                 body: post.body
             }, {headers: Config.headers})
@@ -54,7 +54,7 @@ export class PostService {
     }
 
     updatePost(post: Post): Observable<any> {
-        const url = Config.serverUrl + 'posts/' + post.id;
+        const url = Config.serverUrl + 'Posts/' + post.id;
         return this.http
             .put(url, {title: post.title, body: post.body}, {headers: Config.headers})
             .map(res => res.json())
@@ -64,7 +64,7 @@ export class PostService {
     }
 
     countPosts() {
-        const url = Config.serverUrl + 'posts/count';
+        const url = Config.serverUrl + 'Posts/count';
         return this.http
             .get(url, {headers: Config.headers})
             .map(res => res.json().count)

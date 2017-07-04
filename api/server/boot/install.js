@@ -22,7 +22,7 @@ module.exports = function (app) {
 
                 //make bob an admin
                 role.principals.create({
-                    principalType: RoleMapping.Account,
+                    principalType: RoleMapping.USER,
                     principalId: Accounts[0].id
                 }, function (err, principal) {
                     cb(err);
