@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         this.loginService
             .login(username, password)
             .subscribe((user: LoggedInUser) => {
+                console.log(user);
                 this.message = new Message(MessageType.SUCCESS, 'Logged In');
                 this.userStorage.setUser(user.user);
                 Config.headers.append('Authorization', user.token);

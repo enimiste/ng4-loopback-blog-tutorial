@@ -17,17 +17,17 @@
                     <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" *ngIf="loggedIn">
+                    <li class="dropdown" *ngIf="user != null">
                         <a class="dropdown-toggle" role="button" aria-expanded="false"
                            aria-haspopup="true" href="#"
-                           data-toggle="dropdown">{{ username }} <span class="caret"></span></a>
+                           data-toggle="dropdown">{{ user.firstName + ' ' + user.lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a routerLink="/user/account">Profile</a></li>
                             <li><a href="#" (click)="onLogoutClicked()">Logout</a></li>
                             <li><a routerLink="/post-blog">Create blog post</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown" *ngIf="!loggedIn">
+                    <li class="dropdown" *ngIf="user == null">
                         <a class="dropdown-toggle" role="button" aria-expanded="false"
                            aria-haspopup="true" href="#"
                            data-toggle="dropdown">Settings <span class="caret"></span></a>

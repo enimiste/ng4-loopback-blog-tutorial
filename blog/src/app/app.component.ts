@@ -4,6 +4,7 @@ import {AuthService} from "./user/auth.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Config} from "./common/config";
+import {LoggedInUser, User} from "./user/models";
 
 @Component({
     selector: 'app-root',
@@ -12,25 +13,26 @@ import {Config} from "./common/config";
 })
 export class AppComponent implements OnInit {
     title = 'app';
-    loggedIn: boolean = false;
-    username: string = 'Your username';
+    user: User = null;
 
     constructor(private userStorage: LoggedInUserStorage,
                 private authTokenStorage: AuthTokenStorage,
                 private authService: AuthService,
                 private router: Router) {
-        authService.loggedIn.subscribe((v: boolean) => {
-            this.loggedIn = v;
+        authService.loggedIn.subscribe((user: LoggedInUser | null) => {
+            this.user = Object.assign({}, user.user);//to avoid mutability
         });
     }
 
     ngOnInit(): void {
         const user = this.userStorage.getCurrentUser();
         if (user != null) {
-            this.username = user.username;
-
-        } else
+            this.user = Object.assign({}, user);//to avoid mutability
+            console.log(this.user);
+        } else {
+            this.user = null;
             console.log('User not found');
+        }
     }
 
     onLogoutClicked() {

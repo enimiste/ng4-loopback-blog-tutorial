@@ -9,14 +9,14 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class AuthService {
 
-    public loggedIn: Subject<boolean> = new Subject<boolean>();
+    public loggedIn: Subject<LoggedInUser | null> = new Subject<LoggedInUser | null>();
 
     constructor(private http: Http,
                 private authTokenStorage: AuthTokenStorage,
                 private  userStorage: LoggedInUserStorage) {
-        this.loggedIn.next(false);
-        this.loggedIn.subscribe((v: boolean) => {
-            if (!v) {
+        this.loggedIn.next(null);
+        this.loggedIn.subscribe((v: LoggedInUser | null) => {
+            if (v == null) {
                 this.authTokenStorage.clearToken();
                 this.userStorage.clearCurrentUser();
             }
@@ -29,9 +29,10 @@ export class AuthService {
                 username: username, password: password
             }, {headers: Config.headers})
             .map((res) => {
-                this.loggedIn.next(true);
                 const json = res.json();
-                return new LoggedInUser(json.id, User.fromJson(json.user));
+                const loggedInUser = new LoggedInUser(json.id, User.fromJson(json.user));
+                this.loggedIn.next(loggedInUser);
+                return loggedInUser;
             })
             .catch((err) => Observable.throw(err));
     }
@@ -41,7 +42,7 @@ export class AuthService {
             .post(Config.serverUrl + 'Accounts/logout', {}, {headers: Config.headers})
             .map((res) => {
                 Config.headers.delete('Authorization');
-                this.loggedIn.next(false);
+                this.loggedIn.next(null);
             })
             .catch((err) => Observable.throw(err));
     }
