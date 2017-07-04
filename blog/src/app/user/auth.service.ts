@@ -31,8 +31,7 @@ export class AuthService {
             .map((res) => {
                 this.loggedIn.next(true);
                 const json = res.json();
-                return new LoggedInUser(json.id,
-                    new User(json.user.id, json.user.email, json.user.username));
+                return new LoggedInUser(json.id, User.fromJson(json.user));
             })
             .catch((err) => Observable.throw(err));
     }
