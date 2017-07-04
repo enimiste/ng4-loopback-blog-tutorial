@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 import {Config} from "../common/config";
-import {LoggedInUser, User} from "./models";
+import {LoggedInUser, IdentifiedUser} from "./models";
 import {AuthTokenStorage, LoggedInUserStorage} from "./storage";
 import {Subject} from "rxjs/Subject";
 
@@ -30,7 +30,7 @@ export class AuthService {
             }, {headers: Config.headers})
             .map((res) => {
                 const json = res.json();
-                const loggedInUser = new LoggedInUser(json.id, User.fromJson(json.user));
+                const loggedInUser = new LoggedInUser(json.id, IdentifiedUser.fromJson(json.user));
                 this.loggedIn.next(loggedInUser);
                 return loggedInUser;
             })

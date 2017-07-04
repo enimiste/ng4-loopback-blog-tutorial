@@ -4,7 +4,7 @@ import {AuthService} from "./user/auth.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Config} from "./common/config";
-import {LoggedInUser, User} from "./user/models";
+import {LoggedInUser, IdentifiedUser} from "./user/models";
 
 @Component({
     selector: 'app-root',
@@ -13,7 +13,7 @@ import {LoggedInUser, User} from "./user/models";
 })
 export class AppComponent implements OnInit {
     title = 'app';
-    user: User = null;
+    user: IdentifiedUser = null;
 
     constructor(private userStorage: LoggedInUserStorage,
                 private authTokenStorage: AuthTokenStorage,

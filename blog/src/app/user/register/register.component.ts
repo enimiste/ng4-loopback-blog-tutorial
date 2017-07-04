@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators as V} from "@angular/forms";
+import {UserService} from "../user.service";
+import {User} from "../models";
+import {Message, MessageType} from "../../common/messages";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-register',
@@ -9,8 +13,11 @@ import {FormBuilder, FormGroup, Validators as V} from "@angular/forms";
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     messages: { [key: string]: { [key: string]: string }; } = {};
+    private flush: Message = Message.None();
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder,
+                private userService: UserService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -50,6 +57,16 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.registerForm.controls.username.errors);
+        if (this.registerForm.valid) {
+            const user = User.fromJson(this.registerForm.value);
+            this.userService
+                .register(user)
+                .subscribe(() => {
+                    this.flush = new Message(MessageType.SUCCESS, 'Account created');
+                    this.router.navigate(['user/login']);
+                }, (err) => {
+                    this.flush = new Message(MessageType.ERROR, err);
+                });
+        }
     }
 }

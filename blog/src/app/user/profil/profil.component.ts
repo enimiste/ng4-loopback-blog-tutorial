@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoggedInUser, User} from "../models";
+import {LoggedInUser, IdentifiedUser} from "../models";
 import {LoggedInUserStorage} from "../storage";
 import {AuthService} from "../auth.service";
 
@@ -10,7 +10,7 @@ import {AuthService} from "../auth.service";
 })
 export class ProfilComponent implements OnInit {
 
-    private user: User = null;
+    private user: IdentifiedUser = null;
 
     constructor(private userStorage: LoggedInUserStorage,
                 private authService: AuthService) {

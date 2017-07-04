@@ -1,4 +1,4 @@
-import {LoggedInUser, User} from "./models";
+import {LoggedInUser, IdentifiedUser} from "./models";
 import {Config} from "../common/config";
 import {Injectable} from "@angular/core";
 

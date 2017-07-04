@@ -13,7 +13,7 @@ import {Config} from "../../common/config";
     providers: []
 })
 export class LoginComponent implements OnInit {
-    private message: Message = Message.None();
+    private flush: Message = Message.None();
 
     constructor(private loginService: AuthService,
                 private router: Router,
@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
         this.loginService
             .login(username, password)
             .subscribe((user: LoggedInUser) => {
-                console.log(user);
-                this.message = new Message(MessageType.SUCCESS, 'Logged In');
+                this.flush = new Message(MessageType.SUCCESS, 'Logged In');
                 this.userStorage.setUser(user);
                 Config.headers.append('Authorization', user.token);
                 this.authTokenStorage.setToken(user.token);
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/user/account']);
                 }, 2000);
             }, (err) => {
-                this.message = new Message(MessageType.ERROR, err);
+                this.flush = new Message(MessageType.ERROR, err);
             });
     }
 
