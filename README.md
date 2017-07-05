@@ -60,8 +60,8 @@ cd blog && ng serve
 # Tips :
 + I created in this project an Angular pipes : `keys`  
 + I used also ReactiveFormsModule in registration form.  
-+ To show input errors i created a component `<form-errors></form-errors>`  
-
++ To show input errors i created a component `<app-form-errors></app-form-errors>`  
++ To show alert message i added new component `<app-flush></app-flush>`
 # Thanks to : 
 [Solmak.com](Solmak.com)
 
