@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, ValidationErrors} from "@angular/forms";
 
 @Component({
-    selector: 'form-errors',
+    selector: 'app-form-errors',
     templateUrl: './form-errors.component.html',
     styleUrls: ['./form-errors.component.css']
 })
