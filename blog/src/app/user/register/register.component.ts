@@ -32,18 +32,18 @@ export class RegisterComponent implements OnInit {
         this.messages = {
             firstName: {
                 required: "Required",
-                minlenght: "You should type at least 3 characters",
-                maxlenght: "You exceded 20 characters",
+                minlength: "You should type at least 3 characters",
+                maxlength: "You exceded 20 characters",
             },
             lastName: {
                 required: "Required",
-                minlenght: "You should type at least 3 characters",
-                maxlenght: "You exceded 20 characters",
+                minlength: "You should type at least 3 characters",
+                maxlength: "You exceded 20 characters",
             },
             username: {
                 required: "Required",
-                minlenght: "You should type at least 3 characters",
-                maxlenght: "You exceded 20 characters",
+                minlength: "You should type at least 3 characters",
+                maxlength: "You exceded 20 characters",
             },
             email: {
                 required: "Required",
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
             },
             password: {
                 required: "Required",
-                minlenght: "You should type at least 8 characters",
+                minlength: "You should type at least 8 characters",
             },
         };
     }
