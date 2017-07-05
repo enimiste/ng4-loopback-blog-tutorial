@@ -20,15 +20,16 @@ export class AppComponent implements OnInit {
                 private authService: AuthService,
                 private router: Router) {
         authService.loggedIn.subscribe((user: LoggedInUser | null) => {
-            if (user == null) this.user = null;
+            if (!user) this.user = null;
             else this.user = Object.assign({}, user.user);//to avoid mutability
         });
     }
 
     ngOnInit(): void {
         const user = this.userStorage.getCurrentUser();
-        if (user != null) {
+        if (user) {
             this.user = Object.assign({}, user.user);//to avoid mutability
+            Config.headers.append('Authorization', user.token);
         } else {
             this.user = null;
         }
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit {
     onLogoutClicked() {
         this.authService.logout()
             .subscribe(() => {
+                this.authService.clearAuthData();
                 this.router.navigate(['/user/login']);
-            });
+            }, (err) => console.error(err));
     }
 }

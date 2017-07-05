@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
                 this.authTokenStorage.setToken(user.token);
                 setTimeout(() => {
                     this.router.navigate(['/user/account']);
-                }, 2000);
+                }, 1000);
             }, (err) => {
                 this.flushs.push(new Message(MessageType.ERROR, err));
             });

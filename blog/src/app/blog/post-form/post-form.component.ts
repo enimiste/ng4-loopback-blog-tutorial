@@ -3,6 +3,7 @@ import {Post} from "../post";
 import {PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Message, MessageType} from "../../common/flush/messages";
+import {Config} from "../../common/config";
 
 @Component({
     selector: 'app-post-form',
@@ -46,6 +47,7 @@ export class PostFormComponent implements OnInit {
     }
 
     onsubmit() {
+        console.log(Config.headers.toJSON());
         if (this.post.id) {
             this.postService
                 .updatePost(this.post)

@@ -15,7 +15,8 @@ export class ProfilComponent implements OnInit {
     constructor(private userStorage: LoggedInUserStorage,
                 private authService: AuthService) {
         authService.loggedIn.subscribe((user: LoggedInUser | null) => {
-            this.user = Object.assign({}, user.user);//to avoid mutability
+            if (!user) this.user = null;
+            else this.user = Object.assign({}, user.user);//to avoid mutability
         });
     }
 

@@ -15,12 +15,6 @@ export class AuthService {
                 private authTokenStorage: AuthTokenStorage,
                 private  userStorage: LoggedInUserStorage) {
         this.loggedIn.next(null);
-        this.loggedIn.subscribe((v: LoggedInUser | null) => {
-            if (v == null) {
-                this.authTokenStorage.clearToken();
-                this.userStorage.clearCurrentUser();
-            }
-        });
     }
 
     login(username: string, password: string): Observable<LoggedInUser> {
@@ -40,13 +34,14 @@ export class AuthService {
     logout(): Observable<void> {
         return this.http
             .post(Config.serverUrl + 'Accounts/logout', {}, {headers: Config.headers})
-            .map((res) => {
-                Config.headers.delete('Authorization');
-                this.loggedIn.next(null);
-            })
             .catch((err) => {
-                this.loggedIn.next(null);
                 return Observable.throw(err);
             });
+    }
+
+    clearAuthData() {
+        Config.headers.delete('Authorization');
+        this.authTokenStorage.clearToken();
+        this.userStorage.clearCurrentUser();
     }
 }
