@@ -58,9 +58,10 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         if (this.registerForm.valid) {
-            const user = User.fromJson(this.registerForm.value);
+            const data = this.registerForm.value;
+            const user = User.fromJson(data);
             this.userService
-                .register(user)
+                .register(user, data.password)
                 .subscribe(() => {
                     this.flush = new Message(MessageType.SUCCESS, 'Account created');
                     this.router.navigate(['user/login']);
