@@ -23,7 +23,7 @@
                            data-toggle="dropdown">{{ user.firstName + ' ' + user.lastName }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a routerLink="/user/account">Profile</a></li>
-                            <li><a href="#" (click)="onLogoutClicked()">Logout</a></li>
+                            <li><a href="#" (click)="onLogoutClicked($event)">Logout</a></li>
                             <li><a routerLink="/post-blog">Create blog post</a></li>
                         </ul>
                     </li>

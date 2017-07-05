@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthTokenStorage, LoggedInUserStorage} from "./user/storage";
 import {AuthService} from "./user/auth.service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs/Observable";
 import {Config} from "./common/config";
 import {LoggedInUser, IdentifiedUser} from "./user/models";
 
@@ -35,11 +34,11 @@ export class AppComponent implements OnInit {
         }
     }
 
-    onLogoutClicked() {
+    onLogoutClicked(e: Event) {
+        e.preventDefault();
         this.authService.logout()
             .subscribe(() => {
-                this.authService.clearAuthData();
                 this.router.navigate(['/user/login']);
-            }, (err) => console.error(err));
+            }, (err) => console.info({'err': err}));
     }
 }

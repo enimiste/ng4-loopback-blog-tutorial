@@ -34,6 +34,10 @@ export class AuthService {
     logout(): Observable<void> {
         return this.http
             .post(Config.serverUrl + 'Accounts/logout', {}, {headers: Config.headers})
+            .map((res) => {
+                this.clearAuthData();
+                this.loggedIn.next(null);
+            })
             .catch((err) => {
                 return Observable.throw(err);
             });
