@@ -1,14 +1,7 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <form [formGroup]="registerForm" (submit)="onSubmit()">
-            <div class="alert alert-success" *ngIf="flush.isSuccess()">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ flush.message}}
-            </div>
-            <div class="alert alert-danger" *ngIf="flush.isError()">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Error : </strong> {{ flush.message}}
-            </div>
+            <app-flush [messages]="flushs"></app-flush>
             <div class="form-group">
                 <label for="firstName" class="col-sm-2 control-label">First Name</label>
                 <div class="col-sm-10">

@@ -1,14 +1,11 @@
 export enum MessageType {
-    NONE = -1,
     ERROR = 0,
     SUCCESS = 1,
+    WARNING = 2,
+    INFO = 3,
 }
 export class Message {
     constructor(public type: MessageType, public message: string | null) {
-    }
-
-    static None() {
-        return new Message(MessageType.NONE, null);
     }
 
     isError() {
@@ -17,5 +14,13 @@ export class Message {
 
     isSuccess() {
         return this.type == 1;
+    }
+
+    isWarning() {
+        return this.type == 2;
+    }
+
+    isInfo() {
+        return this.type == 3;
     }
 }

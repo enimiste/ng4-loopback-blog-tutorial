@@ -1,0 +1,4 @@
+<div *ngFor="let flush of messages" [class]="'alert alert-'+ getAlterType(flush)">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ flush.message}}
+</div>

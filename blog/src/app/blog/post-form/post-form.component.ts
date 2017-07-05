@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Post} from "../post";
 import {PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Message, MessageType} from "../../common/messages";
-import {Observable} from "rxjs/Observable";
+import {Message, MessageType} from "../../common/flush/messages";
 
 @Component({
     selector: 'app-post-form',
@@ -14,7 +13,7 @@ import {Observable} from "rxjs/Observable";
 export class PostFormComponent implements OnInit {
 
     private post: Post = new Post();
-    private message: Message = Message.None();
+    private flushs: Message[] = [];
     private formBtnText: string = 'Create';
     private title: string = 'New Blog Post';
     private loading: boolean = false;
@@ -41,7 +40,7 @@ export class PostFormComponent implements OnInit {
                 .subscribe((post) => {
                     this.post = post;
                 }, (err) => {
-                    this.message = new Message(MessageType.ERROR, err);
+                    this.flushs.push(new Message(MessageType.ERROR, err));
                 }, () => this.loading = false);
         }
     }
@@ -51,23 +50,23 @@ export class PostFormComponent implements OnInit {
             this.postService
                 .updatePost(this.post)
                 .subscribe((res) => {
-                    this.message = new Message(MessageType.SUCCESS, 'Post updated');
+                    this.flushs.push(new Message(MessageType.SUCCESS, 'Post updated'));
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id]);
                     }, 2000);
                 }, (err) => {
-                    this.message = new Message(MessageType.ERROR, err);
+                    this.flushs.push(new Message(MessageType.ERROR, err));
                 });
         } else {
             this.postService
                 .createPost(this.post)
                 .subscribe((res) => {
-                    this.message = new Message(MessageType.SUCCESS, 'Post created');
+                    this.flushs.push(new Message(MessageType.SUCCESS, 'Post created'));
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id]);
                     }, 2000);
                 }, (err) => {
-                    this.message = new Message(MessageType.ERROR, err);
+                    this.flushs.push(new Message(MessageType.ERROR, err));
                 });
         }
     }

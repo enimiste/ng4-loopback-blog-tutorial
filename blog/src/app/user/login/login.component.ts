@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
-import {Message, MessageType} from "../../common/messages";
+import {Message, MessageType} from "../../common/flush/messages";
 import {Router} from "@angular/router";
 import {LoggedInUser} from "../models";
 import {AuthTokenStorage, LoggedInUserStorage} from "../storage";
@@ -13,7 +13,7 @@ import {Config} from "../../common/config";
     providers: []
 })
 export class LoginComponent implements OnInit {
-    private flush: Message = Message.None();
+    private flushs: Message[] = [];
 
     constructor(private loginService: AuthService,
                 private router: Router,
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         this.loginService
             .login(username, password)
             .subscribe((user: LoggedInUser) => {
-                this.flush = new Message(MessageType.SUCCESS, 'Logged In');
+                this.flushs.push(new Message(MessageType.SUCCESS, 'Logged In'));
                 this.userStorage.setUser(user);
                 Config.headers.append('Authorization', user.token);
                 this.authTokenStorage.setToken(user.token);
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/user/account']);
                 }, 2000);
             }, (err) => {
-                this.flush = new Message(MessageType.ERROR, err);
+                this.flushs.push(new Message(MessageType.ERROR, err));
             });
     }
 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators as V} from "@angular/forms";
 import {UserService} from "../user.service";
 import {User} from "../models";
-import {Message, MessageType} from "../../common/messages";
+import {Message, MessageType} from "../../common/flush/messages";
 import {Router} from "@angular/router";
 
 @Component({
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     messages: { [key: string]: { [key: string]: string }; } = {};
-    private flush: Message = Message.None();
+    private flushs: Message[] = [];
 
     constructor(private fb: FormBuilder,
                 private userService: UserService,
@@ -63,10 +63,10 @@ export class RegisterComponent implements OnInit {
             this.userService
                 .register(user, data.password)
                 .subscribe(() => {
-                    this.flush = new Message(MessageType.SUCCESS, 'Account created');
+                    this.flushs.push(new Message(MessageType.SUCCESS, 'Account created'));
                     this.router.navigate(['user/login']);
                 }, (err) => {
-                    this.flush = new Message(MessageType.ERROR, err);
+                    this.flushs.push(new Message(MessageType.ERROR, err));
                 });
         }
     }

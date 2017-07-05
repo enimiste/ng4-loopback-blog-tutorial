@@ -18,6 +18,7 @@ import {FormErrorsComponent} from './common/form-errors/form-errors.component';
 import {KeysPipe} from './pipes/keys.pipe';
 import {UserService} from "./user/user.service";
 import {AppRoutingModule} from "./app-routing.module";
+import { FlushComponent } from './common/flush/flush.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {AppRoutingModule} from "./app-routing.module";
         ProfilComponent,
         RegisterComponent,
         FormErrorsComponent,
-        KeysPipe
+        KeysPipe,
+        FlushComponent
     ],
     imports: [
         BrowserModule,
