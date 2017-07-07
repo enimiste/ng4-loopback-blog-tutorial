@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PostService } from './post.service';
+import { RestPostService } from './post.service';
 
-describe('PostService', () => {
+describe('RestPostService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostService]
+      providers: [RestPostService]
     });
   });
 
-  it('should be created', inject([PostService], (service: PostService) => {
+  it('should be created', inject([RestPostService], (service: RestPostService) => {
     expect(service).toBeTruthy();
   }));
 });

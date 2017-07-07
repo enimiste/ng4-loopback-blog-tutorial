@@ -18,7 +18,8 @@ import {FormErrorsComponent} from './common/form-errors/form-errors.component';
 import {KeysPipe} from './pipes/keys.pipe';
 import {UserService} from "./user/user.service";
 import {AppRoutingModule} from "./app-routing.module";
-import { FlushComponent } from './common/flush/flush.component';
+import {FlushComponent} from './common/flush/flush.component';
+import {RestPostService, PostService} from "./blog/post.service";
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { FlushComponent } from './common/flush/flush.component';
         AuthService,
         UserService,
         {provide: LoggedInUserStorage, useClass: LocalLoggedInStorage},
-        {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage}
+        {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage},
+        {provide: PostService, useClass: RestPostService}
     ],
     bootstrap: [AppComponent],
 })

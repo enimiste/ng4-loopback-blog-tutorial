@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {PostQuery, PostService} from "../post.service";
+import {PostQuery, RestPostService, PostService} from "../post.service";
 import {Post} from "../post";
 
 @Component({
     selector: 'app-blog',
     templateUrl: './blog.component.html',
     styleUrls: ['./blog.component.css'],
-    providers: [PostService]
+    providers: []
 })
 export class BlogComponent implements OnInit {
     private title: string = 'Blog page';

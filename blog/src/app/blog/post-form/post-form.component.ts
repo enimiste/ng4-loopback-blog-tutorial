@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from "../post";
-import {PostService} from "../post.service";
+import {RestPostService, PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Message, MessageType} from "../../common/flush/messages";
 import {Config} from "../../common/config";
@@ -9,7 +9,7 @@ import {Config} from "../../common/config";
     selector: 'app-post-form',
     templateUrl: './post-form.component.html',
     styleUrls: ['./post-form.component.css'],
-    providers: [PostService]
+    providers: []
 })
 export class PostFormComponent implements OnInit {
 
