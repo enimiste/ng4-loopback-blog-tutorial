@@ -14,7 +14,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "posts": {
+      "type": "hasMany",
+      "model": "Post",
+      "foreignKey": ""
+    }
+  },
   "acls": [
     {
       "accessType": "*",
@@ -33,6 +39,24 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "login"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__posts"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "__create__posts",
+        "__delete__posts",
+        "__destroyById__posts",
+        "__findById__posts",
+        "__updateById__posts"
+      ]
     }
   ],
   "methods": {}
