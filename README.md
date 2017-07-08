@@ -6,6 +6,10 @@
 - Integration of Boostrap 3
 - Authentication and roles
 - Login form
+- Custom User model : Account
+- AutoComplete Search form
+- Add relation between Account and Post 
+- Install TinyMCE + create tinymce editor component  
 - More will be added soon
 
 # Versions :
