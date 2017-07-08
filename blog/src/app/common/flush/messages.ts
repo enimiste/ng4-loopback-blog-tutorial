@@ -23,4 +23,12 @@ export class Message {
     isInfo() {
         return this.type == 3;
     }
+
+    static success(msg: string) {
+        return new Message(MessageType.SUCCESS, msg);
+    }
+
+    static error(msg: string) {
+        return new Message(MessageType.ERROR, msg);
+    }
 }

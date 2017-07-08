@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         this.loginService
             .login(username, password)
             .subscribe((user: LoggedInUser) => {
-                this.flushs.push(new Message(MessageType.SUCCESS, 'Logged In'));
+                this.flushs.push(Message.success('Logged In'));
                 this.userStorage.setUser(user);
                 Config.headers.append('Authorization', user.token);
                 this.authTokenStorage.setToken(user.token);
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/user/account']);
                 }, 1000);
             }, (err) => {
-                this.flushs.push(new Message(MessageType.ERROR, err));
+                this.flushs.push(Message.error(err));
             });
     }
 

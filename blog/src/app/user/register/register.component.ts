@@ -67,10 +67,10 @@ export class RegisterComponent implements OnInit {
             this.userService
                 .register(user, data.password)
                 .subscribe(() => {
-                    this.flushs.push(new Message(MessageType.SUCCESS, 'Account created'));
+                    this.flushs.push(Message.success('Account created'));
                     this.router.navigate(['user/login']);
                 }, (err) => {
-                    this.flushs.push(new Message(MessageType.ERROR, err));
+                    this.flushs.push(Message.error(err));
                 });
         }
     }

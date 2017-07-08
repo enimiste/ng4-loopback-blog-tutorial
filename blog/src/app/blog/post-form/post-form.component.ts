@@ -48,7 +48,7 @@ export class PostFormComponent implements OnInit {
                     this.postInitialBody = post.body;
                 }, (err) => {
                     this.loading = false;
-                    this.flushs.push(new Message(MessageType.ERROR, err));
+                    this.flushs.push(Message.error(err));
                 });
         } else {
             this.btitle.setTitle('New post');
@@ -64,23 +64,23 @@ export class PostFormComponent implements OnInit {
             this.postService
                 .updatePost(this.post)
                 .subscribe((res) => {
-                    this.flushs.push(new Message(MessageType.SUCCESS, 'Post updated'));
+                    this.flushs.push(Message.success('Post updated'));
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id, 'view']);
                     }, 2000);
                 }, (err) => {
-                    this.flushs.push(new Message(MessageType.ERROR, err));
+                    this.flushs.push(Message.error(err));
                 });
         } else {
             this.postService
                 .createPost(this.post)
                 .subscribe((res) => {
-                    this.flushs.push(new Message(MessageType.SUCCESS, 'Post created'));
+                    this.flushs.push(Message.success('Post created'));
                     setTimeout(() => {
                         this.router.navigate(['/blog', res.id, 'view']);
                     }, 2000);
                 }, (err) => {
-                    this.flushs.push(new Message(MessageType.ERROR, err));
+                    this.flushs.push(Message.error(err));
                 });
         }
     }
