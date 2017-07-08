@@ -1,18 +1,5 @@
-<h1>{{ title }}</h1>
-<span class="help-block">{{ pager.total}} posts</span>
-<div class="blog-list" *ngIf="posts.length">
-    <article *ngFor="let p of posts">
-        <h2><a routerLink="/blog/{{ p.id }}">{{ p.title }}</a></h2>
-        <div class="post-body">{{ p.body}}</div>
-    </article>
-
-    <div class="pager">
-        <span *ngIf="loading" class="load-more" >
-            <i class="glyphicon glyphicon-refresh">&nbsp;</i>Loading ...
-        </span>
-        <span *ngIf="!pager.reachedEnd && !loading" class="load-more" (click)="loadMoreClicked()">
-            <i class="glyphicon glyphicon-refresh">&nbsp;</i>Load more ...
-        </span>
-    <span *ngIf="pager.reachedEnd" class="load-more-end"> You are reached the end of the list</span>
-    </div>
-</div>
+<app-posts-list [title]="title"
+                [posts]="posts"
+                (loadMore)="loadMorePosts()"
+                [loading]="loading"
+                [pager]="pager"></app-posts-list>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {PostQuery, RestPostService, PostService} from "../post.service";
+import {PostQuery, PostService} from "../post.service";
 import {Post} from "../post";
+import { Pager } from "../pager";
 
 @Component({
     selector: 'app-blog',
@@ -8,6 +9,7 @@ import {Post} from "../post";
     styleUrls: ['./blog.component.css'],
     providers: []
 })
+
 export class BlogComponent implements OnInit {
     private title: string = 'Blog page';
     private posts: Post[] = [];
@@ -49,17 +51,10 @@ export class BlogComponent implements OnInit {
             });
     }
 
-    loadMoreClicked() {
+    loadMorePosts() {
         this.pager.current++;
         this.loading = true;
         this.loadPosts();
         this.totalPosts();
     }
-}
-
-interface Pager {
-    limit: number;
-    current: number;
-    reachedEnd: boolean;
-    total: number;
 }
