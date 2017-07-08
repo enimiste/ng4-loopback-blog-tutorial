@@ -25,6 +25,7 @@ import {UserPostsComponent} from './user/user-posts/user-posts.component';
 import {TinymceEditorComponent} from './common/tinymce-editor/tinymce-editor.component';
 import {CategoryFormComponent} from './blog/category-form/category-form.component';
 import {CategoryService} from "./blog/category.service";
+import { CategoryListComponent } from './blog/category-list/category-list.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import {CategoryService} from "./blog/category.service";
         UserPostsComponent,
         TinymceEditorComponent,
         CategoryFormComponent,
+        CategoryListComponent,
     ],
     imports: [
         BrowserModule,

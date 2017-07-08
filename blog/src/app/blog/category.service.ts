@@ -19,4 +19,12 @@ export class CategoryService {
             .map(res => res.json() as Category)
             .catch(err => Observable.throw(err));
     }
+
+    getCategories(): Observable<Category[]> {
+        const url = Config.serverUrl + 'Categories';
+        return this.http
+            .get(url, {headers: Config.headers})
+            .map(res => res.json() as Category[])
+            .catch(err => Observable.throw(err));
+    }
 }

@@ -1,0 +1,26 @@
+<table class="table responsive striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of categories">
+        <td>{{c.id}}</td>
+        <td>{{c.title}}</td>
+        <td>{{c.description}}</td>
+        <td>
+            <a [routerLink]="['/categorie', c.id, 'edit']">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a [routerLink]="['/categorie', c.id, 'delete']">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot *ngIf="categories.length == 0">
+    <tr>
+        <td colspan="4">Empty list</td>
+    </tr>
+    </tfoot>
+</table>
