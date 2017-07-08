@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PostQuery, PostService} from "../post.service";
 import {Post} from "../post";
 import { Pager } from "../pager";
+import {Config} from "../../common/config";
 
 @Component({
     selector: 'app-blog',
@@ -13,7 +14,7 @@ import { Pager } from "../pager";
 export class BlogComponent implements OnInit {
     private title: string = 'Blog page';
     private posts: Post[] = [];
-    private pager: Pager = {limit: 2, current: 0, reachedEnd: false, total: 0};
+    private pager: Pager = {limit: Config.paginationLimit, current: 0, reachedEnd: false, total: 0};
     private loading: boolean = false;
 
     constructor(private postService: PostService) {

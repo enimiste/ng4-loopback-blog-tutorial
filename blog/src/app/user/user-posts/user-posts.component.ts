@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Post} from "../../blog/post";
 import {Pager} from "../../blog/pager";
 import {PostQuery, PostService} from "../../blog/post.service";
+import {Config} from "../../common/config";
 
 @Component({
     selector: 'app-user-posts',
@@ -11,7 +12,7 @@ import {PostQuery, PostService} from "../../blog/post.service";
 export class UserPostsComponent implements OnInit {
     private title: string = 'My Posts';
     private posts: Post[] = [];
-    private pager: Pager = {limit: 2, current: 0, reachedEnd: false, total: 0};
+    private pager: Pager = {limit: Config.paginationLimit, current: 0, reachedEnd: false, total: 0};
     private loading: boolean = false;
 
     constructor(private postService: PostService) {
