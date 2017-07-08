@@ -19,6 +19,7 @@ import {UserPostsComponent} from "./user/user-posts/user-posts.component";
             {path: 'blog', component: BlogComponent},
             {path: 'blog/:id', component: PostDetailComponent},
             {path: 'blog/:id/edit', component: PostFormComponent},
+            {path: 'blog/:id/delete', component: PostFormComponent},
             {path: 'post-blog', component: PostFormComponent},
             {path: 'home', component: HomeComponent},
             {path: 'user/login', component: LoginComponent},

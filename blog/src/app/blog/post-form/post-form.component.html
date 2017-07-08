@@ -1,9 +1,9 @@
 <h1 class="page-title">{{ title}}</h1>
 <ul class="nav nav-tabs tabs-actions">
-    <li *ngIf="post.id"><a routerLink="/blog/{{ post.id}}">View</a></li>
-    <li *ngIf="post.id" class="active"><a routerLink="/blog/{{ post.id}}/edit">Edit</a></li>
-    <li *ngIf="post.id"><a href="#">Delete</a></li>
-    <li *ngIf="!post.id" class="active"><a href="#">Create New Post</a></li>
+    <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}">View</a></li>
+    <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/edit">Edit</a></li>
+    <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/delete">Delete</a></li>
+    <li *ngIf="!post.id" routerLinkActive="active"><a routerLink="/post-blog">Create New Post</a></li>
 </ul>
 
 <form (submit)="onsubmit()">
