@@ -55,7 +55,8 @@
         "__delete__posts",
         "__destroyById__posts",
         "__findById__posts",
-        "__updateById__posts"
+        "__updateById__posts",
+        "__count__posts"
       ]
     }
   ],
