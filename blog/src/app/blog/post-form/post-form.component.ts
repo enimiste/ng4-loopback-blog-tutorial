@@ -47,14 +47,13 @@ export class PostFormComponent implements OnInit {
     }
 
     onsubmit() {
-        console.log(Config.headers.toJSON());
         if (this.post.id) {
             this.postService
                 .updatePost(this.post)
                 .subscribe((res) => {
                     this.flushs.push(new Message(MessageType.SUCCESS, 'Post updated'));
                     setTimeout(() => {
-                        this.router.navigate(['/blog', res.id]);
+                        this.router.navigate(['/blog', res.id, 'view']);
                     }, 2000);
                 }, (err) => {
                     this.flushs.push(new Message(MessageType.ERROR, err));
@@ -65,7 +64,7 @@ export class PostFormComponent implements OnInit {
                 .subscribe((res) => {
                     this.flushs.push(new Message(MessageType.SUCCESS, 'Post created'));
                     setTimeout(() => {
-                        this.router.navigate(['/blog', res.id]);
+                        this.router.navigate(['/blog', res.id, 'view']);
                     }, 2000);
                 }, (err) => {
                     this.flushs.push(new Message(MessageType.ERROR, err));
