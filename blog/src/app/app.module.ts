@@ -20,9 +20,11 @@ import {UserService} from "./user/user.service";
 import {AppRoutingModule} from "./app-routing.module";
 import {FlushComponent} from './common/flush/flush.component';
 import {RestPostService, PostService} from "./blog/post.service";
-import { PostsListComponent } from './blog/posts-list/posts-list.component';
-import { UserPostsComponent } from './user/user-posts/user-posts.component';
-import { TinymceEditorComponent } from './common/tinymce-editor/tinymce-editor.component';
+import {PostsListComponent} from './blog/posts-list/posts-list.component';
+import {UserPostsComponent} from './user/user-posts/user-posts.component';
+import {TinymceEditorComponent} from './common/tinymce-editor/tinymce-editor.component';
+import {CategoryFormComponent} from './blog/category-form/category-form.component';
+import {CategoryService} from "./blog/category.service";
 
 @NgModule({
     declarations: [
@@ -40,6 +42,7 @@ import { TinymceEditorComponent } from './common/tinymce-editor/tinymce-editor.c
         PostsListComponent,
         UserPostsComponent,
         TinymceEditorComponent,
+        CategoryFormComponent,
     ],
     imports: [
         BrowserModule,
@@ -54,7 +57,8 @@ import { TinymceEditorComponent } from './common/tinymce-editor/tinymce-editor.c
         UserService,
         {provide: LoggedInUserStorage, useClass: LocalLoggedInStorage},
         {provide: AuthTokenStorage, useClass: SessionAuthTokenStorage},
-        {provide: PostService, useClass: RestPostService}
+        {provide: PostService, useClass: RestPostService},
+        CategoryService
     ],
     bootstrap: [AppComponent],
 })

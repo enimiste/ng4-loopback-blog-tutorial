@@ -10,6 +10,8 @@
 - AutoComplete Search form
 - Add relation between Account and Post 
 - Install TinyMCE + create tinymce editor component  
+- Add Category model
+- Create Category
 - More will be added soon
 
 # Versions :

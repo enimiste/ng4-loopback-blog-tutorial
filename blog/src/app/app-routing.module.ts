@@ -10,6 +10,7 @@ import {LoginComponent} from "./user/login/login.component";
 import {ProfilComponent} from "./user/profil/profil.component";
 import {RegisterComponent} from "./user/register/register.component";
 import {UserPostsComponent} from "./user/user-posts/user-posts.component";
+import {CategoryFormComponent} from "./blog/category-form/category-form.component";
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import {UserPostsComponent} from "./user/user-posts/user-posts.component";
             {path: 'blog/:id/edit', component: PostFormComponent},
             {path: 'blog/:id/delete', component: PostFormComponent},
             {path: 'post-blog', component: PostFormComponent},
+            {path: 'new-category', component: CategoryFormComponent},
             {path: 'home', component: HomeComponent},
             {path: 'user/login', component: LoginComponent},
             {path: 'user/account', component: ProfilComponent},
