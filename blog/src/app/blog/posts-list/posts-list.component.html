@@ -1,18 +1,20 @@
 <h1>{{ title }}</h1>
 <span class="help-block">{{ pager.total}} posts</span>
 <div class="blog-list" *ngIf="posts.length">
-  <article *ngFor="let p of posts">
-    <h2><a routerLink="/blog/{{ p.id }}/view">{{ p.title }}</a></h2>
-    <div class="post-body">{{ p.body}}</div>
-  </article>
+    <article *ngFor="let p of posts">
+        <h2><a routerLink="/blog/{{ p.id }}/view">{{ p.title }}</a></h2>
+        <span class="help-block" style="margin-top: -12px; padding-left: 10px; font-style: italic">
+            By {{ author(p) }}</span>
+        <div class="post-body">{{ p.body}}</div>
+    </article>
 
-  <div class="pager">
-        <span *ngIf="loading" class="load-more" >
+    <div class="pager">
+        <span *ngIf="loading" class="load-more">
             <i class="glyphicon glyphicon-refresh">&nbsp;</i>Loading ...
         </span>
-    <span *ngIf="!pager.reachedEnd && !loading" class="load-more" (click)="loadMoreClicked()">
+        <span *ngIf="!pager.reachedEnd && !loading" class="load-more" (click)="loadMoreClicked()">
             <i class="glyphicon glyphicon-refresh">&nbsp;</i>Load more ...
         </span>
-    <span *ngIf="pager.reachedEnd" class="load-more-end"> You are reached the end of the list</span>
-  </div>
+        <span *ngIf="pager.reachedEnd" class="load-more-end"> You are reached the end of the list</span>
+    </div>
 </div>

@@ -21,6 +21,14 @@ export class PostsListComponent implements OnInit {
     ngOnInit() {
     }
 
+    author(p: Post) {
+        const account = p.account;
+        if(account){
+            return account.firstName.toUpperCase() + ' ' + account.lastName;
+        }
+        return 'Anonymous';
+    }
+
     loadMoreClicked() {
         this.loadMore.next();
     }
