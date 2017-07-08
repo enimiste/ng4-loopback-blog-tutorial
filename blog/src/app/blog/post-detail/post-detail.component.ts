@@ -4,6 +4,8 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {PostService} from "../post.service";
 import "rxjs/add/operator/switchMap";
 import {Title} from "@angular/platform-browser";
+import {LoggedInUser} from "../../user/models";
+import {AuthService} from "../../user/auth.service";
 
 @Component({
     selector: 'app-post-detail',
@@ -14,10 +16,15 @@ import {Title} from "@angular/platform-browser";
 export class PostDetailComponent implements OnInit {
 
     private post: Post = new Post();
+    private loggedIn: boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private btitle: Title,
-                private postService: PostService) {
+                private postService: PostService,
+                private authService: AuthService) {
+        authService.loggedIn.subscribe((user: LoggedInUser | null) => {
+            this.loggedIn = !user;
+        });
     }
 
     ngOnInit() {

@@ -1,5 +1,5 @@
 <h1 class="page-title">Post : {{ post.id}}</h1>
-<ul class="nav nav-tabs tabs-actions">
+<ul class="nav nav-tabs tabs-actions" *ngIf="loggedIn">
     <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/view">View</a></li>
     <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/edit">Edit</a></li>
     <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/delete">Delete</a></li>
