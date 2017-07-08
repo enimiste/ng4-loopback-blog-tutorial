@@ -5,6 +5,8 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Message, MessageType} from "../../common/flush/messages";
 import {Config} from "../../common/config";
 import {Title} from "@angular/platform-browser";
+import {Category} from "../category-form/category.model";
+import {CategoryService} from "../category.service";
 
 @Component({
     selector: 'app-post-form',
@@ -18,13 +20,15 @@ export class PostFormComponent implements OnInit {
     private flushs: Message[] = [];
     private formBtnText: string = 'Create';
     private title: string = 'New Blog Post';
-    private loading: boolean = false;
+    private loadingPost: boolean = false;
     private postInitialBody: string;
+    private categories: Category[] = [];
 
     constructor(private postService: PostService,
                 private router: Router,
                 private btitle: Title,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private catService: CategoryService) {
     }
 
     ngOnInit() {
@@ -35,24 +39,28 @@ export class PostFormComponent implements OnInit {
                     const id = p['id'];
 
                     if (typeof id != "undefined" && id != null) {
-                        this.loading = true;
+                        this.loadingPost = true;
                         this.title = 'Edit post : ' + id;
                         this.formBtnText = 'Update';
                         return this.postService.getPost(id);
                     } else return [];
                 })
                 .subscribe((post) => {
-                    this.loading = false;
+                    this.loadingPost = false;
                     this.post = post;
                     this.btitle.setTitle('Edit - ' + post.title.substr(0, 20));
                     this.postInitialBody = post.body;
                 }, (err) => {
-                    this.loading = false;
+                    this.loadingPost = false;
                     this.flushs.push(Message.error(err));
                 });
         } else {
             this.btitle.setTitle('New post');
         }
+
+        this.catService
+            .getCategories()
+            .subscribe(cats => this.categories = cats, err => console.error(err));
     }
 
     onBodyChanged(body: string) {

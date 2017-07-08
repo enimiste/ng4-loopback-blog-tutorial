@@ -158,7 +158,8 @@ export class RestPostService extends PostService {
         return this.http
             .post(url, {
                 title: post.title,
-                body: post.body
+                body: post.body,
+                categoryId: post.categoryId
             }, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
@@ -170,7 +171,7 @@ export class RestPostService extends PostService {
         let user = this.userStorage.getCurrentUser() as LoggedInUser;
         const url = Config.serverUrl + 'Accounts/' + user.user.id + '/posts/' + post.id;
         return this.http
-            .put(url, {title: post.title, body: post.body}, {headers: Config.headers})
+            .put(url, {title: post.title, body: post.body, categoryId: post.categoryId}, {headers: Config.headers})
             .map(res => res.json())
             .catch(err => {
                 return Observable.throw(err);

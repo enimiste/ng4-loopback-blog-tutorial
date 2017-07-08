@@ -4,6 +4,7 @@ export class Post {
                 public title?: string,
                 public body?: string,
                 public account?: IdentifiedUser,
-                public accountId?: string) {
+                public accountId?: string,
+                public categoryId?: string) {
     }
 }
