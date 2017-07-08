@@ -57,9 +57,11 @@ export class RestPostService extends PostService {
 
     getPosts(query?: PostQuery): Observable<Post[]> {
         let qs: string = '';
-        if (query != null) {
-            qs = '?filter=' + encodeURI(JSON.stringify(query));
+        if (query == null) {
+            query = {};
         }
+        query.include = 'account';
+        qs = '?filter=' + encodeURI(JSON.stringify(query));
         const url = Config.serverUrl + 'Posts' + qs;
 
         return this.http
@@ -157,6 +159,7 @@ export class RestPostService extends PostService {
 }
 
 export interface PostQuery {
-    limit: number;
-    skip: number;
+    limit?: number;
+    skip?: number;
+    include?: string
 }

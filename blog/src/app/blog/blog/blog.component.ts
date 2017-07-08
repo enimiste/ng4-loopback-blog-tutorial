@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PostQuery, PostService} from "../post.service";
 import {Post} from "../post";
-import { Pager } from "../pager";
+import {Pager} from "../pager";
 import {Config} from "../../common/config";
 
 @Component({
@@ -39,7 +39,7 @@ export class BlogComponent implements OnInit {
                     this.pager.reachedEnd = true;
             }, err => {
                 console.log(err)
-            }, ()=> this.loading = false);
+            }, () => this.loading = false);
     }
 
     totalPosts() {
