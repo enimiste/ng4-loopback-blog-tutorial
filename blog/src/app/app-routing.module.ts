@@ -17,7 +17,7 @@ import {UserPostsComponent} from "./user/user-posts/user-posts.component";
         RouterModule.forRoot([
             {path: '', redirectTo: '/home', pathMatch: 'full'},
             {path: 'blog', component: BlogComponent},
-            {path: 'blog/:id', component: PostDetailComponent},
+            {path: 'blog/:id/view', component: PostDetailComponent},
             {path: 'blog/:id/edit', component: PostFormComponent},
             {path: 'blog/:id/delete', component: PostFormComponent},
             {path: 'post-blog', component: PostFormComponent},

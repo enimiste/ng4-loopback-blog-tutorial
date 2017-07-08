@@ -2,7 +2,7 @@
 <span class="help-block">{{ pager.total}} posts</span>
 <div class="blog-list" *ngIf="posts.length">
   <article *ngFor="let p of posts">
-    <h2><a routerLink="/blog/{{ p.id }}">{{ p.title }}</a></h2>
+    <h2><a routerLink="/blog/{{ p.id }}/view">{{ p.title }}</a></h2>
     <div class="post-body">{{ p.body}}</div>
   </article>
 
