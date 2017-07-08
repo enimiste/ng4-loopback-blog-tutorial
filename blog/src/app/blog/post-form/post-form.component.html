@@ -20,10 +20,12 @@
         <label for="post-body" class="col-sm-2 control-label">Content</label>
         <div class="col-sm-10">
             <textarea class="form-control" id="post-body" placeholder="Body"
-                      cols="5" rows="5"
+                      cols="5" rows="10"
                       name="post.body" [(ngModel)]="post.body"></textarea>
         </div>
     </div>
     <hr/>
-    <button [disabled]="loading" type="submit" class="btn btn-primary pull-right">{{ formBtnText }}</button>
+    <button [disabled]="loading" type="submit" style="margin-top: 20px;"
+            class="btn btn-primary pull-right">{{ formBtnText }}
+    </button>
 </form>

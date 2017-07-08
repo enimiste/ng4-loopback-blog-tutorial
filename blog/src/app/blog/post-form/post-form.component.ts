@@ -39,10 +39,12 @@ export class PostFormComponent implements OnInit {
                     } else return [];
                 })
                 .subscribe((post) => {
+                    this.loading = false;
                     this.post = post;
                 }, (err) => {
+                    this.loading = false;
                     this.flushs.push(new Message(MessageType.ERROR, err));
-                }, () => this.loading = false);
+                });
         }
     }
 
