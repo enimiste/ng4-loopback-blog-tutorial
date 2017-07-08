@@ -4,6 +4,7 @@ import {RestPostService, PostService} from "../post.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Message, MessageType} from "../../common/flush/messages";
 import {Config} from "../../common/config";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-post-form',
@@ -21,6 +22,7 @@ export class PostFormComponent implements OnInit {
 
     constructor(private postService: PostService,
                 private router: Router,
+                private btitle: Title,
                 private route: ActivatedRoute) {
     }
 
@@ -41,10 +43,13 @@ export class PostFormComponent implements OnInit {
                 .subscribe((post) => {
                     this.loading = false;
                     this.post = post;
+                    this.btitle.setTitle('Edit - ' + post.title.substr(0, 20));
                 }, (err) => {
                     this.loading = false;
                     this.flushs.push(new Message(MessageType.ERROR, err));
                 });
+        } else {
+            this.btitle.setTitle('New post');
         }
     }
 

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {LoggedInUser} from "../models";
 import {AuthTokenStorage, LoggedInUserStorage} from "../storage";
 import {Config} from "../../common/config";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-login',
@@ -17,11 +18,13 @@ export class LoginComponent implements OnInit {
 
     constructor(private loginService: AuthService,
                 private router: Router,
+                private btitle: Title,
                 private userStorage: LoggedInUserStorage,
                 private authTokenStorage: AuthTokenStorage) {
     }
 
     ngOnInit() {
+        this.btitle.setTitle('Connextion');
     }
 
     onLoginFormClicked(username, password) {

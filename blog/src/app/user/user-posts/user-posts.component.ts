@@ -3,6 +3,7 @@ import {Post} from "../../blog/post";
 import {Pager} from "../../blog/pager";
 import {PostQuery, PostService} from "../../blog/post.service";
 import {Config} from "../../common/config";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-posts',
@@ -15,10 +16,12 @@ export class UserPostsComponent implements OnInit {
     private pager: Pager = {limit: Config.paginationLimit, current: 0, reachedEnd: false, total: 0};
     private loading: boolean = false;
 
-    constructor(private postService: PostService) {
+    constructor(private postService: PostService,
+                private btitle: Title) {
     }
 
     ngOnInit() {
+        this.btitle.setTitle(this.title);
         this.loadPosts();
         this.totalPosts();
     }

@@ -4,6 +4,7 @@ import {UserService} from "../user.service";
 import {User} from "../models";
 import {Message, MessageType} from "../../common/flush/messages";
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-register',
@@ -16,11 +17,13 @@ export class RegisterComponent implements OnInit {
     private flushs: Message[] = [];
 
     constructor(private fb: FormBuilder,
+                private btitle: Title,
                 private userService: UserService,
                 private router: Router) {
     }
 
     ngOnInit() {
+        this.btitle.setTitle('Registration');
         this.registerForm = this.fb.group({
             firstName: this.fb.control(null, [V.required, V.minLength(3), V.maxLength(20)]),
             lastName: this.fb.control(null, [V.required, V.minLength(3), V.maxLength(20)]),

@@ -3,6 +3,7 @@ import {Post} from "../post";
 import {ActivatedRoute, Params} from "@angular/router";
 import {PostService} from "../post.service";
 import "rxjs/add/operator/switchMap";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-post-detail',
@@ -15,6 +16,7 @@ export class PostDetailComponent implements OnInit {
     private post: Post = new Post();
 
     constructor(private route: ActivatedRoute,
+                private btitle: Title,
                 private postService: PostService) {
     }
 
@@ -25,7 +27,11 @@ export class PostDetailComponent implements OnInit {
                 const id = p['id'];
                 return this.postService.getPost(id);
             })
-            .subscribe((post: Post) => this.post = post, err => console.log(err));
+            .subscribe((post: Post) => {
+                    this.post = post;
+                    this.btitle.setTitle('View - ' + post.title.substr(0, 20));
+                }
+                , err => console.log(err));
     }
 
 }
