@@ -26,7 +26,7 @@ import {UserPostsComponent} from "./user/user-posts/user-posts.component";
             {path: 'user/account', component: ProfilComponent},
             {path: 'user/register', component: RegisterComponent},
             {path: 'user/posts', component: UserPostsComponent}
-        ], {useHash: true})
+        ])
     ],
     exports: [RouterModule],
     declarations: []

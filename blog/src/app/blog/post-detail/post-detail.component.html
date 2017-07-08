@@ -1,13 +1,11 @@
 <h1 class="page-title">Post : {{ post.id}}</h1>
 <ul class="nav nav-tabs tabs-actions" *ngIf="loggedIn">
     <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/view">View</a></li>
-    <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/edit">Edit</a></li>
-    <li *ngIf="post.id" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/delete">Delete</a></li>
+    <li *ngIf="post.id && canEdit(post)" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/edit">Edit</a></li>
+    <li *ngIf="post.id && canEdit(post)" routerLinkActive="active"><a routerLink="/blog/{{ post.id}}/delete">Delete</a></li>
     <li *ngIf="!post.id" routerLinkActive="active"><a routerLink="/post-blog">Create New Post</a></li>
 </ul>
 <article class="post">
     <h2>{{ post.title }}</h2>
-    <div class="post-content">
-        {{ post.body }}
-    </div>
+    <div class="post-content" [innerHtml]="post.body"></div>
 </article>

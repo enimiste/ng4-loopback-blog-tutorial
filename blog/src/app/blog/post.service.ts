@@ -8,6 +8,7 @@ import {Post} from "./post";
 import {Config} from "../common/config";
 import {AuthTokenStorage, LoggedInUserStorage} from "../user/storage";
 import {LoggedInUser} from "../user/models";
+import "rxjs/add/observable/of";
 
 export abstract class PostService {
     /**
@@ -45,6 +46,8 @@ export abstract class PostService {
     abstract updatePost(post: Post): Observable<any>;
 
     abstract countCurrentUserPosts();
+
+    abstract search(q: string): Observable<Post[]>;
 }
 
 @Injectable()
@@ -70,6 +73,34 @@ export class RestPostService extends PostService {
             .catch(err => {
                 return Observable.throw(err);
             });
+    }
+
+    search(q: string, query?: PostQuery): Observable<Post[]> {
+        q = q.trim();
+        if (q != '') {
+            let qs: string = '';
+            if (query == null) {
+                query = {};
+            }
+            query.include = 'account';
+
+            query.where = {
+                or: [
+                    {title: {like: q, options: 'i'}}
+                ]
+            };
+
+            qs = '?filter=' + encodeURI(JSON.stringify(query));
+            const url = Config.serverUrl + 'Posts' + qs;
+
+            return this.http
+                .get(url, {headers: Config.headers})
+                .map(res => res.json())
+                .catch(err => {
+                    return Observable.throw(err);
+                });
+        } else
+            return Observable.of([]);
     }
 
     getPost(id: string): Observable<Post> {
@@ -161,5 +192,6 @@ export class RestPostService extends PostService {
 export interface PostQuery {
     limit?: number;
     skip?: number;
-    include?: string
+    include?: string;
+    where?: { [key: string]: any };
 }

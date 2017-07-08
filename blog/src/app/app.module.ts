@@ -22,6 +22,7 @@ import {FlushComponent} from './common/flush/flush.component';
 import {RestPostService, PostService} from "./blog/post.service";
 import { PostsListComponent } from './blog/posts-list/posts-list.component';
 import { UserPostsComponent } from './user/user-posts/user-posts.component';
+import { TinymceEditorComponent } from './common/tinymce-editor/tinymce-editor.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { UserPostsComponent } from './user/user-posts/user-posts.component';
         FlushComponent,
         PostsListComponent,
         UserPostsComponent,
+        TinymceEditorComponent,
     ],
     imports: [
         BrowserModule,

@@ -17,6 +17,7 @@ export class PostDetailComponent implements OnInit {
 
     private post: Post = new Post();
     private loggedIn: boolean = false;
+    private user: LoggedInUser;
 
     constructor(private route: ActivatedRoute,
                 private btitle: Title,
@@ -24,7 +25,10 @@ export class PostDetailComponent implements OnInit {
                 private authService: AuthService) {
         authService.loggedIn.subscribe((user: LoggedInUser | null) => {
             this.loggedIn = !user;
+            this.user = user;
         });
+        this.loggedIn = this.authService.isLoggedIn();
+        this.user = this.authService.currentUser();
     }
 
     ngOnInit() {
@@ -41,4 +45,7 @@ export class PostDetailComponent implements OnInit {
                 , err => console.log(err));
     }
 
+    canEdit(p: Post): boolean {
+        return p.accountId == this.user.user.id;
+    }
 }

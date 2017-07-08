@@ -1,0 +1,12 @@
+.search-block input {
+    width: 100%;
+    margin-right: 100px;
+}
+
+.search-block .dropdown-menu{
+    width: 140%;
+}
+
+.search-block .dropdown-menu li{
+    cursor: pointer;
+}

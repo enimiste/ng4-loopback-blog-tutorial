@@ -8,4 +8,5 @@ export class Config {
     static currentUserKey: string = 'currentUser';
     static tokenKey: string = 'authToken';
     static paginationLimit = 10;
+    static baseUrl = '/';
 }

@@ -54,4 +54,8 @@ export class AuthService {
             .getCurrentUser();
         return currentUser != null;
     }
+
+    currentUser(): LoggedInUser {
+        return this.userStorage.getCurrentUser();
+    }
 }

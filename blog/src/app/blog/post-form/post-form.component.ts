@@ -19,6 +19,7 @@ export class PostFormComponent implements OnInit {
     private formBtnText: string = 'Create';
     private title: string = 'New Blog Post';
     private loading: boolean = false;
+    private postInitialBody: string;
 
     constructor(private postService: PostService,
                 private router: Router,
@@ -44,6 +45,7 @@ export class PostFormComponent implements OnInit {
                     this.loading = false;
                     this.post = post;
                     this.btitle.setTitle('Edit - ' + post.title.substr(0, 20));
+                    this.postInitialBody = post.body;
                 }, (err) => {
                     this.loading = false;
                     this.flushs.push(new Message(MessageType.ERROR, err));
@@ -51,6 +53,10 @@ export class PostFormComponent implements OnInit {
         } else {
             this.btitle.setTitle('New post');
         }
+    }
+
+    onBodyChanged(body: string) {
+        this.post.body = body;
     }
 
     onsubmit() {

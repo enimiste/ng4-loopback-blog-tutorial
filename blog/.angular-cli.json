@@ -25,7 +25,12 @@
       ],
       "scripts": [
         "vendor/jquery1.12.4/jquery.js",
-        "vendor/bootstrap3/js/bootstrap.js"
+        "vendor/bootstrap3/js/bootstrap.js",
+        "../node_modules/tinymce/tinymce.js",
+        "../node_modules/tinymce/themes/modern/theme.js",
+        "../node_modules/tinymce/plugins/link/plugin.js",
+        "../node_modules/tinymce/plugins/paste/plugin.js",
+        "../node_modules/tinymce/plugins/table/plugin.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

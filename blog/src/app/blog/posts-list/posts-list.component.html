@@ -5,7 +5,7 @@
         <h2><a routerLink="/blog/{{ p.id }}/view">{{ p.title }}</a></h2>
         <span class="help-block" style="margin-top: -12px; padding-left: 10px; font-style: italic">
             By {{ author(p) }}</span>
-        <div class="post-body">{{ p.body}}</div>
+        <div class="post-body" [innerHtml]="p.body"></div>
     </article>
 
     <div class="pager">

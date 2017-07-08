@@ -19,9 +19,10 @@
     <div class="form-group">
         <label for="post-body" class="col-sm-2 control-label">Content</label>
         <div class="col-sm-10">
-            <textarea class="form-control" id="post-body" placeholder="Body"
-                      cols="5" rows="10"
-                      name="post.body" [(ngModel)]="post.body"></textarea>
+            <app-tinymce-editor id="post-body"
+                                [value]="postInitialBody"
+                                [elementId]="post-body"
+                                (onEditorKeyup)="onBodyChanged($event)"></app-tinymce-editor>
         </div>
     </div>
     <hr/>
