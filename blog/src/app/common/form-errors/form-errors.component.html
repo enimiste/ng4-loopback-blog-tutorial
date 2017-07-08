@@ -1,7 +1,7 @@
 <div class="form-errors" [hidden]="form.controls[inputName].valid || form.controls[inputName].untouched">
     <p *ngFor="let rule of (form.controls[inputName].errors | keys)">
         <span *ngIf="rule" class="form-errors-item">
-            {{ messages[rule] }}
+            {{ messages.get(rule) }}
         </span>
     </p>
 </div>

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
+import {RulesMessages} from "./rulemessage.model";
 
 @Component({
     selector: 'app-form-errors',
@@ -9,7 +10,7 @@ import {FormGroup, ValidationErrors} from "@angular/forms";
 export class FormErrorsComponent implements OnInit {
 
     @Input() form: FormGroup;
-    @Input() messages: { [key: string]: string; };
+    @Input() messages: RulesMessages;
     @Input() inputName: string;
     @Input() isPassword: boolean = false;
 
