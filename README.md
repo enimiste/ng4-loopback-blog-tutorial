@@ -12,6 +12,8 @@
 - Install TinyMCE + create tinymce editor component  
 - Add Category model
 - Create Category
+- List Categories
+- Choose Category when creating or editing posts
 - More will be added soon
 
 # Versions :
