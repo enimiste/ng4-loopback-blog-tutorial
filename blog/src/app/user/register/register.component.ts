@@ -5,6 +5,7 @@ import {User} from "../models";
 import {Message, MessageType} from "../../common/flush/messages";
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {RulesMessages} from "../../common/form-errors/rulemessage.model";
 
 @Component({
     selector: 'app-register',
@@ -13,7 +14,7 @@ import {Title} from "@angular/platform-browser";
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
-    messages: { [key: string]: { [key: string]: string }; } = {};
+    messages: { [key: string]: RulesMessages } = {};
     private flushs: Message[] = [];
 
     constructor(private fb: FormBuilder,
@@ -33,29 +34,29 @@ export class RegisterComponent implements OnInit {
         });
 
         this.messages = {
-            firstName: {
+            firstName: new RulesMessages({
                 required: "Required",
                 minlength: "You should type at least 3 characters",
                 maxlength: "You exceded 20 characters",
-            },
-            lastName: {
+            }),
+            lastName: new RulesMessages({
                 required: "Required",
                 minlength: "You should type at least 3 characters",
                 maxlength: "You exceded 20 characters",
-            },
-            username: {
+            }),
+            username: new RulesMessages({
                 required: "Required",
                 minlength: "You should type at least 3 characters",
                 maxlength: "You exceded 20 characters",
-            },
-            email: {
+            }),
+            email: new RulesMessages({
                 required: "Required",
                 email: "Invalid email format",
-            },
-            password: {
+            }),
+            password: new RulesMessages({
                 required: "Required",
                 minlength: "You should type at least 8 characters",
-            },
+            }),
         };
     }
 
