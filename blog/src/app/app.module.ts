@@ -21,7 +21,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FlushComponent} from './common/flush/flush.component';
 import {RestPostService, PostService} from "./blog/post.service";
 import { PostsListComponent } from './blog/posts-list/posts-list.component';
-import { PostsComponent } from './user/posts/posts.component';
+import { UserPostsComponent } from './user/user-posts/user-posts.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +37,7 @@ import { PostsComponent } from './user/posts/posts.component';
         KeysPipe,
         FlushComponent,
         PostsListComponent,
-        PostsComponent
+        UserPostsComponent,
     ],
     imports: [
         BrowserModule,

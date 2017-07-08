@@ -9,6 +9,7 @@ import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./user/login/login.component";
 import {ProfilComponent} from "./user/profil/profil.component";
 import {RegisterComponent} from "./user/register/register.component";
+import {UserPostsComponent} from "./user/user-posts/user-posts.component";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import {RegisterComponent} from "./user/register/register.component";
             {path: 'home', component: HomeComponent},
             {path: 'user/login', component: LoginComponent},
             {path: 'user/account', component: ProfilComponent},
-            {path: 'user/register', component: RegisterComponent}
+            {path: 'user/register', component: RegisterComponent},
+            {path: 'user/posts', component: UserPostsComponent}
         ])
     ],
     exports: [RouterModule],

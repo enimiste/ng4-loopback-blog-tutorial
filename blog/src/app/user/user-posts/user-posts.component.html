@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs tabs-actions">
+    <li *ngIf="true" routerLinkActive="active"><a routerLink="/user/account">Profile</a></li>
+    <li *ngIf="true" routerLinkActive="active"><a routerLink="/user/posts">Posts</a></li>
+</ul>
+<app-posts-list [title]="title"
+                [posts]="posts"
+                (loadMore)="loadMorePosts()"
+                [loading]="loading"
+                [pager]="pager"></app-posts-list>
