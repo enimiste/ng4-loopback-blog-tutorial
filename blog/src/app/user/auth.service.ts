@@ -48,4 +48,10 @@ export class AuthService {
         this.authTokenStorage.clearToken();
         this.userStorage.clearCurrentUser();
     }
+
+    isLoggedIn(): boolean {
+        let currentUser = this.userStorage
+            .getCurrentUser();
+        return currentUser != null;
+    }
 }
